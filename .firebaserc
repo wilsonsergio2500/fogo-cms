@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ng6-fire-shop": {
+      "hosting": {
+        "Fire8": [
+          "ng6-fire-shop"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ng6-fire-shop"
+  }
+}

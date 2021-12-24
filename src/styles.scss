@@ -1,0 +1,135 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* You can add global styles to this file, and also import other style files */
+
+@import "styles-variables";
+
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+@font-face {
+  font-family: 'salazar';
+  src: url('assets/fonts/salazar.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'fabolous';
+  src: url('assets/fonts/fabolous.ttf') format('truetype');
+}
+/*@font-face {
+  font-family: 'mycomic';
+  src: url('assets/fonts/mycomic.ttf') format('truetype');
+}*/
+
+@font-face {
+  font-family: 'spartan';
+  src: url('assets/fonts/spartan.otf') format('opentype');
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+$custom-typography: mat-typography-config( $font-family: 'Roboto Mono' );
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+div {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-color-primary {
+  color: $mat-color-primary
+}
+.mat-color-accent {
+  color: $mat-color-accent;
+}
+.mat-color-warn {
+  color: $mat-color-warn;
+}
+
+
+:root {
+  --mat-color-primary: $mat-color-primary;
+  --mat-color-accent: $mat-color-accent;
+  --mat-color-warn: $mat-color-warn
+}
+
+.app-title {
+  cursor: pointer;
+  font-family: mycomic;
+  font-size: 25px;
+  display: flex;
+
+  .mat-icon {
+      margin:5px;
+  }
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.snackbar-branded {
+  background-color: white;
+  border: 1px solid lightgray;
+
+  .loading-message {
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+$color-main: #2E2E2E;
+
+a {
+  color: $color-main;
+  text-decoration: none;
+}
+
+.dialog-responsive {
+  width: 800px;
+}
+.img-gallery-responsive {
+  width: 1200px;
+
+ &.gallery-container {
+    max-height: 65vh;
+    overflow: auto;
+  }
+}
+
+@media(max-width: 959px) {
+  .dialog-responsive, .img-gallery-responsive {
+    max-width: 90vw !important;
+  }
+}
+
+.formly-file-uploader > * .mat-form-field-label {
+  display: none !important;
+}
+
+.hidden-field {
+  display: none;
+}
+/*require it to be Global*/
+/*require it to be list-filter.component.html*/
+.cdk-virtual-scroll-content-wrapper {
+  max-width: 100%;
+}
+
+.white-space-pre-wrap {
+  white-space: pre-wrap;
+}
+
+
+
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+@import 'assets/cms-themes/more-than-just-comics.scss'

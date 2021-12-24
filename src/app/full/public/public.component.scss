@@ -1,0 +1,72 @@
+:host {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  .mat-sidenav-container {
+    flex-grow: 1;
+  }
+
+  .fill-space {
+    flex: 1 1 auto;
+  }
+
+  .nav-item {
+    padding: 10px;
+
+    & li {
+      display: inline-block;
+      font-size: 0.8em;
+      list-style-type: none;
+      margin-left: 2px;
+    }
+  }
+
+  .user-photo-url-background {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+:host ::ng-deep .menu-list-item .mat-badge-content {
+  font-size: 0.6em;
+  left: 96px;
+  top: 2px;
+}
+
+.toolbar-element {
+  padding: 0 14px;
+}
+
+.main-content {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+
+.mat-sidenav {
+  width: 240px;
+  box-shadow: 0 0 4px 2px rgba(0,0,0,.2);
+}
+
+.mat-sidenav .mat-toolbar {
+  width: 240px;
+  position: relative;
+}
+
+.side-content {
+  overflow-y: hidden;
+  display: flex;
+  height: 100%;
+  flex-flow: column;
+}
+
+.noshadow {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
