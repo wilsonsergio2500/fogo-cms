@@ -65,3 +65,4 @@ Fire8.njsproj.user
 /firestore-debug.log
 /obj/Debug/Fire8.njsproj.AssemblyReference.cache
 /src/environments
+.firebase
