@@ -23,6 +23,7 @@ jobs:
       - name: prepare enviroment Prod
         run: |
           npm run push:env -- -filename=environment.prod.ts -content='$DEV_ENV_FILE'
+          echo '$DEV_ENV_FILE'
         shell: bash
         env:
           DEV_ENV_FILE : ${{secrets.NG_ENV_PROD}}
