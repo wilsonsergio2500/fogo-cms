@@ -19,10 +19,18 @@ const args = process.argv.reduce((prev, curr) => {
 
 
 const targetFolder = path.resolve(__dirname, '..', 'src', 'environments');
+const fullPath = `${targetFolder}\\${args.filename}`;
 
-fs.writeFile(`${targetFolder}\\${args.filename}`, args.content, function (err) {
-  if (err) {
-    return console.log(err);
-  }
-  console.log("The file was saved!");
-});
+const displayFileContent = (path) => {
+  const buff = fs.readFileSync(path);
+  console.log(buff.toString());
+}
+fs.writeFileSync(fullPath, args.content);
+displayFileContent(fullPath);
+//fs.writeFile(fullPath, args.content, function (err) {
+//  if (err) {
+//    return console.log(err);
+//  }
+//  console.log("The file was saved!");
+//  displayFileContent(fullPath);
+//});
