@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy-firebase-rules": "firebase deploy --only firestore:rules"
+    "deploy-firebase-rules": "firebase deploy --only firestore:rules",
+    "push:env": "node ./node-cmds/create-envs.js"
   },
   "private": true,
   "dependencies": {

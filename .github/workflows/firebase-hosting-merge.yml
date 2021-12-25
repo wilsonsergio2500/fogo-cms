@@ -16,16 +16,16 @@ jobs:
       - run: npm install
       - name: prepare enviroment
         run: |
-          echo $DEV_ENV_FILE >> src/environments/environment.prod.ts
-        shell: bash
-        env:
-          DEV_ENV_FILE : ${{secrets.NG_ENV_PROD}}
-      - name: prepare enviroment Prod
-        run: |
-          echo $DEV_ENV_FILE >> src/environments/environment.ts
+          npm run push:env -- -filename=environment.ts -content=$DEV_ENV_FILE
         shell: bash
         env:
           DEV_ENV_FILE : ${{secrets.NG_ENV_TEST}}
+      - name: prepare enviroment Prod
+        run: |
+          npm run push:env -- -filename=environment.prod.ts -content=$DEV_ENV_FILE
+        shell: bash
+        env:
+          DEV_ENV_FILE : ${{secrets.NG_ENV_PROD}}
       - run: npm run build-prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
