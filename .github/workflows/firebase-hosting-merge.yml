@@ -14,25 +14,24 @@ jobs:
         with:
           node-version: "14.x"
       - run: npm install
-      - name: show prod file
+      - name: push envs
         run: |
-          echo $DEV_ENV_FILE
-        shell: bash
+          node ./node-cmds/write-prod.js
         env:
-          DEV_ENV_FILE : ${{secrets.NG_ENV_TEST}}
-      - name: prepare enviroment
-        run: |
-          npm run push:env -- -filename=environment.ts -content='$DEV_ENV_FILE'
-        shell: bash
-        env:
-          DEV_ENV_FILE : ${{secrets.NG_ENV_TEST}}
-      - name: prepare enviroment Prod
-        run: |
-          npm run push:env -- -filename=environment.prod.ts -content='$DEV_ENV_FILE'
-          echo '$DEV_ENV_FILE'
-        shell: bash
-        env:
-          DEV_ENV_FILE : ${{secrets.NG_ENV_PROD}}
+          FIREBASE_ENV_PROD : ${{secrets.NG_ENV_PROD}}
+      #- name: prepare enviroment
+      #  run: |
+      #    npm run push:env -- -filename=environment.ts -content='$DEV_ENV_FILE'
+      #  shell: bash
+      #  env:
+      #    DEV_ENV_FILE : ${{secrets.NG_ENV_TEST}}
+      #- name: prepare enviroment Prod
+      #  run: |
+      #    npm run push:env -- -filename=environment.prod.ts -content='$DEV_ENV_FILE'
+      #    echo '$DEV_ENV_FILE'
+      #  shell: bash
+      #  env:
+      #    DEV_ENV_FILE : ${{secrets.NG_ENV_PROD}}
       - run: npm run build-prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
