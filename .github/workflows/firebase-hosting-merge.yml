@@ -11,6 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          node-version: "14.x"
+      - run: npm install
+      - name: prepare enviroment
+        run: |
+          echo $DEV_ENV_FILE >> src/environments/environment.prod.ts
+        shell: bash
+        env:
+          DEV_ENV_FILE : ${{secrets.NG_ENV_PROD}}
+      - name: prepare enviroment Prod
+        run: |
+          echo $DEV_ENV_FILE >> src/environments/environment.ts
+        shell: bash
+        env:
+          DEV_ENV_FILE : ${{secrets.NG_ENV_TEST}}
       - run: npm run build-prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
