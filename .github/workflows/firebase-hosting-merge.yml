@@ -14,6 +14,12 @@ jobs:
         with:
           node-version: "14.x"
       - run: npm install
+      - name: show prod file
+        run: |
+          echo $DEV_ENV_FILE
+        shell: bash
+        env:
+          DEV_ENV_FILE : ${{secrets.NG_ENV_TEST}}
       - name: prepare enviroment
         run: |
           npm run push:env -- -filename=environment.ts -content='$DEV_ENV_FILE'
