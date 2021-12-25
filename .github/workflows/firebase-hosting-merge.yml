@@ -16,13 +16,13 @@ jobs:
       - run: npm install
       - name: prepare enviroment
         run: |
-          npm run push:env -- -filename=environment.ts -content=$DEV_ENV_FILE
+          npm run push:env -- -filename=environment.ts -content='$DEV_ENV_FILE'
         shell: bash
         env:
           DEV_ENV_FILE : ${{secrets.NG_ENV_TEST}}
       - name: prepare enviroment Prod
         run: |
-          npm run push:env -- -filename=environment.prod.ts -content=$DEV_ENV_FILE
+          npm run push:env -- -filename=environment.prod.ts -content='$DEV_ENV_FILE'
         shell: bash
         env:
           DEV_ENV_FILE : ${{secrets.NG_ENV_PROD}}
