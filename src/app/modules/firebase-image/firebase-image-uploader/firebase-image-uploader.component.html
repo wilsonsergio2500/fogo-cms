@@ -8,7 +8,7 @@
 
   <div>
 
-    <loading-button [IsBusy]="loading" (onSubmit)="onPickImage(inputFile)" mat-raised-button type="button" [disabled]="_disabled">
+    <loading-button [IsBusy]="loading" (onSubmit)="onPickImage(inputFile)" mat-raised-button type="button" [disabled]="disable">
       <loading-button-ready>
         <ng-content></ng-content>
         <mat-icon>camera_alt</mat-icon>

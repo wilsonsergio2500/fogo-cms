@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { IFormlyTypeGroup } from '../../base/IFormlyTypeGroup';
 
@@ -19,49 +19,29 @@ usage:
   templateUrl: 'formly-form-flex-json.component.html',
   styleUrls: ['formly-form-flex-json.component.scss']
 })
-export class FormlyFormFlexJsonComponent<T> implements OnChanges{
+export class FormlyFormFlexJsonComponent<T> {
 
   private _showRevertbtn: boolean = false;
 
-  @Input()
-  formlyGroup: IFormlyTypeGroup<T>;
-
-  @Input('btn-ready')
-  btnReady: string;
-
-  @Input('btn-busy')
-  btnBusy: string;
-
-  @Input('is-busy')
-  btnIsBusy: boolean = false;
+  @Input() formlyGroup: IFormlyTypeGroup<T>;
+  @Input('btn-ready') btnReady: string;
+  @Input('btn-busy') btnBusy: string;
+  @Input('is-busy') btnIsBusy: boolean = false;
+  @Input('read-only') readOnly: boolean = false;
 
   disableOnInvalid: boolean = false;
   @Input('btn-disable-on-invalid')
   set disableSubmitBtnOnInvalid(value: boolean) {
     this.disableOnInvalid = coerceBooleanProperty(value);
   }
-  
-
-  @Input('read-only')
-  readOnly: boolean = false;
-
 
   @Input('show-revert')
   set showRevertBtn(value: boolean) {
     this._showRevertbtn = coerceBooleanProperty(value);
   }
+  @Output() onFormSubmit: EventEmitter<T> = new EventEmitter<T>();
   get showRevertBtn() {
     return this._showRevertbtn;
-  }
-
-  @Output()
-  onFormSubmit: EventEmitter<T> = new EventEmitter<T>();
-
-
-  constructor() {
-  }
-
-  ngOnChanges(changes: any) {
   }
 
   get isSubmitDisabled() {

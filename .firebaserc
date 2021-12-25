@@ -1,14 +1,14 @@
 {
   "targets": {
-    "ng6-fire-shop": {
+    "fogo-cms": {
       "hosting": {
-        "Fire8": [
-          "ng6-fire-shop"
+        "fogocms": [
+          "fogo-cms"
         ]
       }
     }
   },
   "projects": {
-    "default": "ng6-fire-shop"
+    "default": "fogo-cms"
   }
 }

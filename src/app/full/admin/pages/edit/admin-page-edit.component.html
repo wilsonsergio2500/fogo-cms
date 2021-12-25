@@ -19,10 +19,8 @@
     <ng-container *ngIf="record$ | async as record; else noRecord">
 
       <formly-form-flex-json [formlyGroup]="formlyGroup"
-                             [show-revert]="false"
                              [btn-ready]="btnReadyLabel"
                              [btn-busy]="btnLoadingLabel"
-                             [read-only]="false"
                              (onFormSubmit)="formSubmit()">
       </formly-form-flex-json>
 

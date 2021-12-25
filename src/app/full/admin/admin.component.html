@@ -64,7 +64,7 @@
         <span class="app-title" routerLink="/admin"> More Than Just Comics (Admin)</span>
         <span class="fill-space"></span>
 
-        <ng-container *ngIf="user$ | async as user; else done">
+        <ng-container *ngIf="user$ | async as user">
 
           <ng-container *ngIf="user.photoURL">
             <button mat-icon-button mat-raised-button class="user-photo-url-background" [style.backgroundImage]="getUrlPath(user.photoURL)" [matMenuTriggerFor]="usermenu">

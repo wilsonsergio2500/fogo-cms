@@ -20,10 +20,6 @@ body {
   font-family: 'fabolous';
   src: url('assets/fonts/fabolous.ttf') format('truetype');
 }
-/*@font-face {
-  font-family: 'mycomic';
-  src: url('assets/fonts/mycomic.ttf') format('truetype');
-}*/
 
 @font-face {
   font-family: 'spartan';
@@ -56,20 +52,9 @@ div {
 
 
 :root {
-  --mat-color-primary: $mat-color-primary;
-  --mat-color-accent: $mat-color-accent;
-  --mat-color-warn: $mat-color-warn
-}
-
-.app-title {
-  cursor: pointer;
-  font-family: mycomic;
-  font-size: 25px;
-  display: flex;
-
-  .mat-icon {
-      margin:5px;
-  }
+  --mat-color-primary: #{$mat-color-primary};
+  --mat-color-accent: #{$mat-color-accent};
+  --mat-color-warn: #{$mat-color-warn}
 }
 
 [hidden] {

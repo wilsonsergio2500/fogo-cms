@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnDestroy} from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
 import { NavigationBuilderDb } from '../components/navigation-builder/tree-navigation-builder.provider';
@@ -15,10 +15,10 @@ import { NavigationCreateAction } from '../../../../states/navigation/navigation
     templateUrl: 'admin-navigation-list.component.html',
     styleUrls: [`admin-navigation-list.component.scss`]
   })
-export class AdminNavigationListComponent implements OnInit, OnDestroy {
+export class AdminNavigationListComponent implements OnDestroy {
 
 
-    @Select(NavigationState.IsLoading) woring$: Observable<boolean>;
+  @Select(NavigationState.IsLoading) working$: Observable<boolean>;
     forceExpand = false;
     btnLoading = false;
     private subscriptions: Subscription[] = [];
@@ -28,11 +28,6 @@ export class AdminNavigationListComponent implements OnInit, OnDestroy {
         private navigationDb: NavigationBuilderDb,
         private confirmationDialog: ConfirmationDialogService
     ) {
-    }
-
-    ngOnInit() {
-
-
     }
 
     addTop($event: IPageNavigation) {

@@ -19,8 +19,6 @@
   <formly-form-flex-json [formlyGroup]="formlyGroup"
                          btn-ready="Create"
                          btn-busy="Creating..."
-                         [read-only]="false"
-                         [is-busy]="isPosting$ | async"
                          (onFormSubmit)="formSubmit()">
   </formly-form-flex-json>
 
