@@ -1,6 +1,7 @@
 # Fogo Cms
 
 ![example workflow](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-merge.yml/badge.svg)
+![Firebase PR workflow](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.x
 
