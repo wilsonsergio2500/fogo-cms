@@ -1,14 +1,17 @@
 {
   "name": "fogocms",
   "version": "0.0.0",
+  "license": "MIT",
+  "author": "WilsonSergio <wilsonsergio2500@gmail.com> (https://github.com/wilsonsergio2500)",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build-dev": "ng build",
+    "build-prod": "ng build --prod",
     "deploy-firebase-rules": "firebase deploy --only firestore:rules"
   },
   "private": true,
