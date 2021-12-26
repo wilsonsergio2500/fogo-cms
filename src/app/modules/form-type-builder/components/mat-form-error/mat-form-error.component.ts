@@ -9,12 +9,9 @@ import { FormGroupDirective } from '@angular/forms';
 })
 export class MatFormErrorComponent implements OnInit {
 
-    @Input()
-    formControlItem: string;
-    @Input()
-    errors: any = null;
-    @Input()
-    showOnFormTouched: boolean = false;
+    @Input() formControlItem: string;
+    @Input() errors: any = null;
+    @Input() showOnFormTouched: boolean = false;
 
     private _errors: any = {
         required: "Required",

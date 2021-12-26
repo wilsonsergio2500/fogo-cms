@@ -1,7 +1,21 @@
 
 import { Component, Injector, OnInit, Input } from '@angular/core';
-import { NgControl, ControlValueAccessor, FormControl } from '@angular/forms';
-import { BaseMatErrorAccesorHandler } from './base/basematerroraccesorhandler';
+import { NgControl, FormControl } from '@angular/forms';
+
+
+export abstract class BaseMatErrorAccesorHandler<T = any> {
+
+  public __errors: any = {};
+  public __contractErrors: any = {};
+
+  setFormErrors(config: any) {
+    this.__errors = config;
+  }
+  setContractErrors<L>(config: { [p in keyof L]: any });
+  setContractErrors(config: { [key: string]: any }) {
+    this.__contractErrors = config;
+  }
+}
 
 @Component({
     selector: 'mat-form-error-accesor',
@@ -14,7 +28,6 @@ export class MatFormErrorAccesorComponent implements  OnInit {
     @Input() showOnFormTouched: boolean = false;
 
     private FormControl: FormControl;
-    private valueAccesor: ControlValueAccessor;
     private _errors:  any = {
         required: "Required",
         minlength: "Minimum length not met",

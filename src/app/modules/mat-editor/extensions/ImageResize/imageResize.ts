@@ -1,5 +1,5 @@
 import DefaultOptions from './defaultOptions'
-import { DisplaySize } from './modules/displaysize';
+import { DisplaySize } from './modules/display-size';
 import { Toolbar } from './modules/toolbar';
 import { Resize } from './modules/Resize';
 
