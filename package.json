@@ -9,8 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy-firebase-rules": "firebase deploy --only firestore:rules",
-    "push:env": "node ./node-cmds/create-envs.js"
+    "deploy-firebase-rules": "firebase deploy --only firestore:rules"
   },
   "private": true,
   "dependencies": {
@@ -35,7 +34,7 @@
     "firebase": "^8.10.0",
     "image-compressor.js": "^1.1.4",
     "ng2-file-upload": "^1.4.0",
-    "ngx-quill": "^14.0.0",
+    "ngx-quill": "13.4.0",
     "quill": "^1.3.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

@@ -16,9 +16,10 @@ jobs:
       - run: npm install
       - name: push envs
         run: |
-          node ./node-cmds/write-prod.js
+          node ./node-cmds/write-envs.js
         env:
           FIREBASE_ENV_PROD : ${{secrets.NG_ENV_PROD}}
+          FIREBASE_ENV_TEST: ${{secrets.NG_ENV_TEST}}
       #- name: prepare enviroment
       #  run: |
       #    npm run push:env -- -filename=environment.ts -content='$DEV_ENV_FILE'
