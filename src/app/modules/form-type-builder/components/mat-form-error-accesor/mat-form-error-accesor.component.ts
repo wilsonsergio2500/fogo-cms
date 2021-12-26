@@ -1,6 +1,6 @@
 
-import { Component, Optional, Self, Inject, Injector, AfterContentInit, OnInit, Input } from '@angular/core';
-import { NgControl, NG_VALUE_ACCESSOR, ControlValueAccessor, FormControl } from '@angular/forms';
+import { Component, Injector, OnInit, Input } from '@angular/core';
+import { NgControl, ControlValueAccessor, FormControl } from '@angular/forms';
 import { BaseMatErrorAccesorHandler } from './base/basematerroraccesorhandler';
 
 @Component({
@@ -9,12 +9,9 @@ import { BaseMatErrorAccesorHandler } from './base/basematerroraccesorhandler';
 })
 export class MatFormErrorAccesorComponent implements  OnInit {
 
-    @Input()
-    errors: any = null;
-    @Input()
-    formControlContractItem: string;
-    @Input()
-    showOnFormTouched: boolean = false;
+    @Input() errors: any = null;
+    @Input() formControlContractItem: string;
+    @Input() showOnFormTouched: boolean = false;
 
     private FormControl: FormControl;
     private valueAccesor: ControlValueAccessor;

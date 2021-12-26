@@ -1,3 +1,6 @@
+import { Directive } from "@angular/core";
+
+@Directive()
 export abstract class BaseMatErrorAccesorHandler<T = any> {
 
   public __errors: any = {};

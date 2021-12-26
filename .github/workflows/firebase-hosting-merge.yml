@@ -20,19 +20,6 @@ jobs:
         env:
           FIREBASE_ENV_PROD : ${{secrets.NG_ENV_PROD}}
           FIREBASE_ENV_TEST: ${{secrets.NG_ENV_TEST}}
-      #- name: prepare enviroment
-      #  run: |
-      #    npm run push:env -- -filename=environment.ts -content='$DEV_ENV_FILE'
-      #  shell: bash
-      #  env:
-      #    DEV_ENV_FILE : ${{secrets.NG_ENV_TEST}}
-      #- name: prepare enviroment Prod
-      #  run: |
-      #    npm run push:env -- -filename=environment.prod.ts -content='$DEV_ENV_FILE'
-      #    echo '$DEV_ENV_FILE'
-      #  shell: bash
-      #  env:
-      #    DEV_ENV_FILE : ${{secrets.NG_ENV_PROD}}
       - run: npm run build-prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
