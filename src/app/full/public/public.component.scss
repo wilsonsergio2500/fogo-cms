@@ -28,6 +28,13 @@
     background-size: cover;
     background-position: center center;
   }
+
+  .main-content {
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+    flex: 1 1 auto;
+  }
 }
 
 :host ::ng-deep .menu-list-item .mat-badge-content {
@@ -40,12 +47,7 @@
   padding: 0 14px;
 }
 
-.main-content {
-  height: 100%;
-  overflow-y: auto;
-  width: 100%;
-  flex: 1 1 auto;
-}
+
 
 
 .mat-sidenav {

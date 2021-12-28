@@ -7,13 +7,13 @@
 
   <ng-template #done>
 
-    <div fxLayout="row">
+    <div class="navigate-heading">
       <div [ngStyle]="{'margin-top.px': 15}">
-        <a mat-button [routerLink]="listPath">
-          <mat-icon color="primary">chevron_left</mat-icon>
-        </a>
+        <button mat-mini-fab color="primary" aria-label="Page List" [routerLink]="listPath">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
       </div>
-      <h3>{{title}}</h3>
+      <h2>{{title}}</h2>
     </div>
 
     <ng-container *ngIf="record$ | async as record; else noRecord">

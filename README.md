@@ -4,13 +4,13 @@
 
 ![Firebase Hosting](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-merge.yml/badge.svg)
 ![Firebase PR workflow](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)
-![GitHub](https://img.shields.io/github/license/wilsonsergio2500/fogo-cms?style=flat-square)
+[![GitHub](https://img.shields.io/github/license/wilsonsergio2500/fogo-cms?style=flat-square)](https://github.com/wilsonsergio2500/fogo-cms/blob/main/LICENSE)
 [![npm](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://fogo-cms.web.app/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.x
 
 ## The Idea
-A simple to use Headless Content Management System (CMS) developed using dream team angular paradigms - Firebase, @ngxs, @angular/fire, @ngx-formly, @angular/flex-layout
+A responsive and simple to use Headless Content Management System (CMS) developed using dream team angular paradigms - Firebase, @ngxs, @angular/fire, @ngx-formly, @angular/flex-layout, @angular/material. The goal was to create a project that could be pivot into an MVP or a getting started.
 
 ## The Demo
 👾 More Than Just Comic => https://fogo-cms.web.app/
@@ -97,8 +97,18 @@ Application Paths
 | Views             | Route  |
 | ------------------------|--------|
 | Main Site               | http://localhost:4200/ | 
+| Login                   | http://localhost:4200/login | 
 | Page(s)                 | http://localhost:4200/[page-url]  | 
 | Blogs                   | http://localhost:4200/blogs  | 
 | Blog Site               | http://localhost:4200/blog/[blog-url]  | 
 | Admin                   | http://localhost:4200/admin  |  
 
+## Demo UI
+### Admin Dashboard
+![Admin Page](resources/screenshots/admin-page.png?raw=true "Admin Page")
+### Image Gallery
+![Image Gallery](resources/screenshots/image-gallery-site.png?raw=true "Image Gallery")
+### Navigation Builder
+![Navigation Builder](resources/screenshots/navigation-builder-page.png?raw=true "Navigation Builder")
+### Blog Post
+![Blog Post](resources/screenshots/blog-post-site.png?raw=true "Blog Post")

@@ -1,12 +1,18 @@
-:host{
-    display: flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media(max-width: 600px) {
     img{
-        width:100%;
-        object-fit:cover;
-        object-position:center;
+        max-height:180px;
     }
+  }
 }

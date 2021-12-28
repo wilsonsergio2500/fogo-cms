@@ -1,12 +1,12 @@
 :host {
-    overflow-x:hidden;
+  overflow-x: hidden;
 
   .blogs-container {
     padding: 30px;
     width: 1500px;
 
     @media(max-width: 1919px) {
-        width:95%;
+      width: 95%;
     }
 
     .blog-item {
@@ -14,6 +14,12 @@
 
       @media(max-width: 600px) {
         flex-direction: column;
+
+        .blog-image {
+          img {
+            max-height: 200px;
+          }
+        }
       }
 
       .blog-image {

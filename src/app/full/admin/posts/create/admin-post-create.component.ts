@@ -16,6 +16,8 @@ export class AdminPostCreateComponent implements OnInit {
 
   listPath = "/admin/posts";
   title = 'Posts';
+  btnReadyLabel = 'Create';
+  btnLoadingLabel = 'Creating...';
 
   constructor(
     private store: Store,
