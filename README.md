@@ -105,10 +105,11 @@ Application Paths
 
 ## Demo UI
 ### Admin Dashboard
-![Admin Page](https://github.com/wilsonsergio2500/fogo-cms/blob/master/resources/screenshots/admin-page.PNG?raw=true "Admin Page")
+![Admin Page](resources/screenshots/admin-page.PNG?raw=true "Admin Page")
 ### Image Gallery
 ![Image Gallery](resources/screenshots/image-gallery-site.PNG?raw=true "Image Gallery")
-### Navigation Builder
-![Navigation Builder](resources/screenshots/navigation-builder-page.PNG?raw=true "Navigation Builder")
 ### Blog Post
 ![Blog Post](resources/screenshots/blog-post-site.PNG?raw=true "Blog Post")
+### Navigation Builder
+![Navigation Builder](resources/screenshots/navigation-builder-page.PNG?raw=true "Navigation Builder")
+
