@@ -105,11 +105,24 @@ Application Paths
 
 ## Demo UI
 ### Admin Dashboard
+Firebase Auth Guarded list of authorized resources
+
 ![Admin Page](resources/screenshots/admin-page.PNG?raw=true "Admin Page")
 ### Image Gallery
+A centralized image management system that integrates with Firebase Storage.
+
 ![Image Gallery](resources/screenshots/image-gallery-site.PNG?raw=true "Image Gallery")
 ### Blog Post
 ![Blog Post](resources/screenshots/blog-post-site.PNG?raw=true "Blog Post")
 ### Navigation Builder
+A curated site navigaton builder
+
 ![Navigation Builder](resources/screenshots/navigation-builder-page.PNG?raw=true "Navigation Builder")
 
+### Mobile Views
+<p align="center">
+  <img width="300"  src="resources/screenshots/mobile-view-1.png?raw=true">
+</p>
+<p align="center">
+  <img width="300"  src="resources/screenshots/mobile-view-2.png?raw=true">
+</p>
