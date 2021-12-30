@@ -1,4 +1,4 @@
-<div fxLayout="column" fxFlex fxLayoutAlign="center center" >
+<div class="blogs-root" >
 
   <div fxLayout="column" fxLayoutAlign="start center" [ngStyle]="{'padding-top.px': 30}" *ngIf="working$ | async as loading; else done">
     <mat-progress-spinner mode="indeterminate" [diameter]="30" [strokeWidth]="2"></mat-progress-spinner>
@@ -8,7 +8,7 @@
   <ng-template #done>
     <div class="blogs-container">
 
-      <h1 class="mat-color-primary">Blog Posts</h1>
+      <h1 class="mat-color-primary">Blog Posts-</h1>
 
 
       <ng-container *ngIf="records$ | async as records">

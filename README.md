@@ -2,8 +2,8 @@
 🔥 Fogo Cms
 </h1>
 
-![Firebase Hosting](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-merge.yml/badge.svg)
-![Firebase PR workflow](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)
+[![Firebase Hosting](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-merge.yml)
+[![Firebase PR workflow](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)](https://github.com/wilsonsergio2500/fogo-cms/actions/workflows/firebase-hosting-pull-request.yml)
 [![GitHub](https://img.shields.io/github/license/wilsonsergio2500/fogo-cms?style=flat-square)](https://github.com/wilsonsergio2500/fogo-cms/blob/main/LICENSE)
 [![npm](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://fogo-cms.web.app/)
 

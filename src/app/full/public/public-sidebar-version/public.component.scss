@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  height: 100%;
+
+  .main-content {
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
+  .side-content {
+    overflow-y: hidden;
+    display: flex;
+    height: 100%;
+    flex-flow: column;
+
+    .fill-space {
+      flex: 1 1 auto;
+    }
+
+    .user-photo-url-background {
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+  }
+
+  .mat-sidenav {
+    width: 240px;
+    box-shadow: 0 0 4px 2px rgba(0,0,0,.2);
+  }
+}
+

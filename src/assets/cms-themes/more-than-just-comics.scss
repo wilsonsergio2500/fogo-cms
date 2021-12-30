@@ -38,6 +38,11 @@ toolbar-navigation-item {
     font-family: mycomic;
     font-size: 20px;
   }
+
+  button {
+    font-family: mycomic;
+    font-size: 20px;
+  }
 }
 
 .logo-font{
@@ -45,4 +50,8 @@ toolbar-navigation-item {
 }
 .content-container hr {
   color: var(--mat-color-primary) !important;
+}
+.mat-list-item-content{
+    font-size:18px !important;
+    font-family:mycomic;
 }
