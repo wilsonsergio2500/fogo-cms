@@ -316,56 +316,7 @@ export namespace FieldTypes {
       this.type = 'textarea';
     }
   }
-
-  export class MaskField extends InputBase {
-    constructor(label: string, maskConfig: Partial<ITextMask>, required = true, fxFlex = 100) {
-      super(label, required, fxFlex)
-      this.type = 'input-mask';
-      this.templateOptions.textMask = { ...this.templateOptions.textMask, ...maskConfig };
-    }
-  }
-
-  export class PhoneMaskedField extends InputBase {
-    constructor(label: string, required = true, fxFlex = 100) {
-      super(label, required, fxFlex)
-      this.type = 'input-mask';
-      this.templateOptions.textMask = <ITextMask>{
-        mask: [/[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-      }
-      this.templateOptions.description = 'Enter phone format as ###-###-####';
-      //this.validators = {
-      //  'phone': {
-      //    expression: (formGroup: FormGroup) => {
-      //      let value = formGroup.value;
-      //      if (!!value) {
-      //        let regex = /^\d{3}-\d{3}-\d{4}$/;
-      //        return regex.test(value);
-      //      } else {
-      //        //if value should be handle by the required validator
-      //        return true;
-      //      }
-
-      //    },
-      //    message: (error, field: FormlyFieldConfig) => {
-      //      return `${field.templateOptions.label} is not in a valid format`;
-      //    }
-      //  },
-
-      //}
-
-    }
-  }
-
-  export class ZipCodeMaskedField extends InputBase {
-    constructor(label: string, required = true, fxFlex = 100) {
-      super(label, required, fxFlex)
-      this.type = 'input-mask';
-      this.templateOptions.textMask = <ITextMask>{
-        mask: [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-      }
-      this.templateOptions.description = 'Enter Zip Code format as #####-####';
-    }
-  }
+ 
 
   export class PickStateField extends InputBase {
     constructor(label: string, required = true, fxFlex = 100) {
