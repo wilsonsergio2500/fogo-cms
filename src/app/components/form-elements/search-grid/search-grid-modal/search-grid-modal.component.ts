@@ -18,11 +18,9 @@ export class SearchGridModalComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource();
   subscriptions: Subscription[] = null;
   columns: any[];
-  @ViewChild(MatPaginator, { static: true })
-  paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   initialFilter: string;
-  @ViewChild('searchinput', { static: false })
-  private SearchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('searchinput', { static: false }) private SearchInput: ElementRef<HTMLInputElement>;
   dic: { [key: string]: string } = {};
   paginationEnabled$: Observable<boolean>;
 

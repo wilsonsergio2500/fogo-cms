@@ -15,6 +15,7 @@ const routes: Routes = [
       <Route>{ path: 'register', component: RegisterComponent },
       <Route>{ path: 'main', loadChildren: () => import('./views/main/main.module').then(m => m.MainViewModule) },
       <Route>{ path: 'admin', loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule), ...canActivate(redirectUnauthorizedToLanding) },
+      <Route>{ path: 'store', loadChildren: () => import('./views/store/store.module').then(m => m.StoreModule)},
       <Route>{ path: '', loadChildren: () => import('./views/public/public.module').then(m => m.PublicModule) }
 
     ]

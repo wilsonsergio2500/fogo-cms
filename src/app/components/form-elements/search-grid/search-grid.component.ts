@@ -36,15 +36,11 @@ export class SearchGridComponent implements ControlValueAccessor, OnInit, DoChec
     }
 
 
-    @Input()
-    recordsFunc: () => Observable<any[]>;
-    @Input()
-    TextField: string;
-    @Input()
-    ValueField: string;
+    @Input() recordsFunc: () => Observable<any[]>;
+    @Input() TextField: string;
+    @Input() ValueField: string;
     @Input() errorStateMatcher: ErrorStateMatcher;
-    @Input()
-    formlyAttributes: any;
+    @Input() formlyAttributes: any;
 
     viewValue = '';
     value: number | string | ISearchGridValue = null;;
@@ -90,9 +86,7 @@ export class SearchGridComponent implements ControlValueAccessor, OnInit, DoChec
     private subscriptions: Subscription[] = [];
 
     @ViewChild('input', { static: false }) inputElement: ElementRef<HTMLInputElement>;
-
-    @ContentChildren(SearchGridColumnComponent)
-    columns: QueryList<SearchGridColumnComponent>;
+    @ContentChildren(SearchGridColumnComponent) columns: QueryList<SearchGridColumnComponent>;
     gridColumns: ISearchGridColumnItem[] = [];
 
 

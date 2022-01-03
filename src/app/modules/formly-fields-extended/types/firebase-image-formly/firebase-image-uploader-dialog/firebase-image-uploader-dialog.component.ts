@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FieldTypes } from '../../../base/fields-types-schemas';
 import { FormlyTypeGroup } from '../../../base/FormlyTypeGroup';
 import { IImageFirebaseModel } from '@firebase-schemas/images/image.model';
@@ -7,6 +7,7 @@ import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import { ImagesCreateRecordAction } from '@states/images/images.actions';
 import { Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
+import { IFirebaseImageUploaderDialogParam } from '../firebase-image-uploader-service/firebase-image-uploader.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class FirebaseImageUploaderDialogComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private actions: Actions,
-    private matDialogRef: MatDialogRef<FirebaseImageUploaderDialogComponent>
+    private matDialogRef: MatDialogRef<FirebaseImageUploaderDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public dialogParams: IFirebaseImageUploaderDialogParam
   ) {
   }
 
@@ -44,8 +46,9 @@ export class FirebaseImageUploaderDialogComponent implements OnInit, OnDestroy {
       }
     }
 
+    const { gallery: bucket } = this.dialogParams;
     const tags = new FieldTypes.ChipField('Tags', 'Enter tags', true, 100, { validators: { maxSizeValidator } });
-    const imageUrl = new FieldTypes.FirebaseImageUploader('Upload', true, 30, { bucket: 'images' }, { className: 'firebase-image-uploader' });
+    const imageUrl = new FieldTypes.FirebaseImageUploader('Upload', true, 30, { bucket }, { className: 'firebase-image-uploader' });
 
     this.formlyGroup = new FormlyTypeGroup<IImageFirebaseModel>({
       imageUrl,

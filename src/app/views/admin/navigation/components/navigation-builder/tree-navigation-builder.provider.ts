@@ -6,19 +6,6 @@ import { NavigationState } from '@states/navigation/navigation.state';
 import { tap } from 'rxjs/operators';
 import { INavigationFirebaseModel, INavigationModel } from '../../../../../schemas/navigations/navigation.model';
 
-const TREE_DATA = {
-  Reminders: [
-    {
-      Label: 'Cook dinner', Url: '', children: [
-        { Label: "Apple", Url: "", children: [] },
-      ]
-    },
-    { Label: 'Read the Material Design spec', Url: '', children: [] },
-    { Label: 'Upgrade Application to Angular', Url: '', children: [] }
-  ]
-
-};
-
 @Injectable()
 export class NavigationBuilderDb {
 

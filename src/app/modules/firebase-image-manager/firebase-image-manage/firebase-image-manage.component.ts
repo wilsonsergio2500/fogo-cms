@@ -29,7 +29,8 @@ export type GALLERY_DISPLAY_TYPE = "PRESENTER" | "SELECTION";
   @Select(ImagesState.getPreviousEnabled) prev$: Observable<boolean>;
   @Select(ImagesState.IsPaginatorEnabled) paginationEnabled$: Observable<boolean>;
 
-  @Input() displayType: GALLERY_DISPLAY_TYPE = "PRESENTER"
+  @Input() displayType: GALLERY_DISPLAY_TYPE = "PRESENTER";
+  @Input() gallery = 'images';
   @Output() onSelectImage = new EventEmitter<string>(null);
   private subscriptions: Subscription[] = [];
 
@@ -45,11 +46,7 @@ export type GALLERY_DISPLAY_TYPE = "PRESENTER" | "SELECTION";
     }
 
   onAdd() {
-    const onUp$ = this.uploadService.OnOpen().pipe(
-      tap(path => {
-        console.log(path);
-      })
-    );
+    const onUp$ = this.uploadService.OnOpen();
 
     this.subscriptions = [...this.subscriptions, onUp$.subscribe()];
 

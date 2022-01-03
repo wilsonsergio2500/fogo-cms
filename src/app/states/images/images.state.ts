@@ -83,7 +83,8 @@ export class ImagesState {
       }),
       tap(() => {
         this.snackBarStatus.OpenComplete('Image succesfully added');
-      })
+      }),
+      mergeMap(() => ctx.dispatch(new ImagesLoadFirstPageAction()))
     )
   }
 
@@ -119,7 +120,7 @@ export class ImagesState {
   onGoToFirstPage(ctx: StateContext<IImagesStateModel>) {
     const { paginationState } = ctx.getState();
     const { pageSize, orderByField, begining } = paginationState;
-    return this.schema.queryCollection(ref => ref.limit(pageSize).orderBy(orderByField, 'desc').startAt(begining))
+    return this.schema.queryCollection(ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
       .get().pipe(
         tap(models => {
           const currentSize = models.docs.length;
@@ -136,7 +137,8 @@ export class ImagesState {
           const newPaginationState = { ...paginationState, prev, first, last, items, pagination_count, prev_start_at, next };
           ctx.patchState({ paginationState: newPaginationState });
           Logger.LogTable(`Firebase Paginate Images[Page:${pagination_count + 1}]`, items);
-        })
+        }),
+        mergeMap(() => ctx.dispatch(new ImagesDone()))
       )
 
   }
@@ -218,6 +220,7 @@ export class ImagesState {
       }),
       mergeMap(() => from(this.schema.delete(id))),
       tap(() => this.snackBarStatus.OpenComplete('Image has been Removed')),
+      mergeMap(() => ctx.dispatch(new ImagesLoadFirstPageAction()))
     )
   }
 
