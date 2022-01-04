@@ -13,6 +13,7 @@
     "install:admin-tasks": "cd ./admin-tasks && npm install",
     "do:admin-tasks": "cd ./admin-tasks && npm run add-users",
     "deploy:firebase-rules": "firebase deploy --only firestore:rules",
+    "deploy:firebase-indexes": "firebase deploy --only firestore:indexes",
     "build-dev": "ng build",
     "build-prod": "ng build --prod"
   },

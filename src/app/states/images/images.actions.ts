@@ -1,4 +1,5 @@
 import { IImageFirebaseModel } from "@firebase-schemas/images/image.model";
+import { GalleryType } from "./gallery.types";
 import { IImagesRemoveRequest } from "./images.model";
 
 export class ImagesLoading {
@@ -9,13 +10,14 @@ export class ImagesDone {
   static type = '[Images] Set As Done';
 }
 
+export class ImagesSetGallery {
+  static type = '[Images] Set Gallery';
+  constructor(public gallery: GalleryType) { }
+}
+
 export class ImagesCreateRecordAction {
   static type = '[Images] Create Records';
   constructor(public request: IImageFirebaseModel) { }
-}
-
-export class ImagesLoadAction {
-  static type = '[Images] Load Action';
 }
 
 export class ImagesLoadFirstPageAction {

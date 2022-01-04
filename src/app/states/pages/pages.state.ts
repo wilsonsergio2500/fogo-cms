@@ -163,13 +163,11 @@ export class PageState {
   @Action(PageSearchItemsByTitleAction)
   onFindPage(ctx: StateContext<IPageStateModel>, action: PageSearchItemsByTitleAction) {
     const { searchTitle } = action;
-    console.log(searchTitle);
     return from(this.pages.queryCollection(ref => searchLike(ref, 'title', searchTitle)).get()).pipe(
       mergeMap(models => {
         const has = models.docs.length;
         if (has) {
           const pageFilterByTitle = models.docs.map(g => g.data() as IPageFirebaseModel);
-          console.log(pageFilterByTitle);
           ctx.patchState({ pageFilterByTitle });
           return empty();
         }

@@ -1,6 +1,6 @@
 import { Store, State, Selector, StateContext, Action } from '@ngxs/store';
 import { IImagesStateModel } from './images.model';
-import { ImagesDone, ImagesLoading, ImagesCreateRecordAction, ImagesLoadAction, ImagesLoadFirstPageAction, ImagesLoadNextPageAction, ImagesLoadPreviousPageAction, ImagesRemoveAction } from './images.actions';
+import { ImagesDone, ImagesLoading, ImagesCreateRecordAction, ImagesLoadFirstPageAction, ImagesLoadNextPageAction, ImagesLoadPreviousPageAction, ImagesRemoveAction, ImagesSetGallery } from './images.actions';
 import { tap, mergeMap, catchError } from 'rxjs/operators';
 import { FirebasePaginationStateModel } from '../../firebase/types/firabes-pagination';
 import { IImageFirebaseModel } from '@firebase-schemas/images/image.model';
@@ -13,13 +13,15 @@ import { AuthState } from '../auth/auth.state';
 import { Logger } from '../../utils/logger';
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { CMS_GALLERY } from './gallery.types';
 
 
 @State<IImagesStateModel>({
   name: 'imagesState',
   defaults: <IImagesStateModel>{
     loading: true,
-    paginationState: new FirebasePaginationStateModel<IImageFirebaseModel>(20)
+    paginationState: new FirebasePaginationStateModel<IImageFirebaseModel>(20),
+    gallery: CMS_GALLERY.images
   }
 })
 @Injectable()
@@ -72,11 +74,20 @@ export class ImagesState {
     });
   }
 
+  @Action(ImagesSetGallery)
+  onSetGallery(ctx: StateContext<IImagesStateModel>, action: ImagesSetGallery) {
+
+    const { gallery } = action;
+    ctx.patchState({ gallery });
+    return ctx.dispatch(new ImagesLoadFirstPageAction());
+  }
+
   @Action(ImagesCreateRecordAction)
   onCreateRecordAction(ctx: StateContext<IImagesStateModel>, action: ImagesCreateRecordAction) {
+    const { gallery } = ctx.getState();
     return this.store.selectOnce(AuthState.getUser).pipe(
       mergeMap((user) => {
-        const form = { ...action.request };
+        const form = { ...action.request, gallery };
         form.createDate = Date.now();
         form.createdBy = user;
         return from(this.schema.create(form));
@@ -88,39 +99,11 @@ export class ImagesState {
     )
   }
 
-  @Action(ImagesLoadAction)
-  onLoad(ctx: StateContext<IImagesStateModel>) {
-
-    const { paginationState } = ctx.getState();
-    const { pageSize, orderByField } = paginationState;
-    if (!this.subscription) {
-      ctx.dispatch(new ImagesLoading());
-      this.subscription = this.schema.collection$(ref => ref.limit(pageSize).orderBy(orderByField, 'desc')).pipe(
-        tap(model => {
-          if (!model.length) {
-            return false;
-          }
-          const begining = model[0][orderByField];;
-          const first = model[0][orderByField];
-          const last = model[model.length - 1][orderByField];
-          const pagination_count = 0;
-          const next = model.length === pageSize;
-          const prev = false;
-          const prevStartAt = [first];
-          const newPaginationState = { ...paginationState, begining, first, last, pagination_count, next, prev, prev_start_at: prevStartAt, items: model };
-          ctx.patchState({ paginationState: newPaginationState })
-        }),
-        mergeMap(() => ctx.dispatch(new ImagesDone()))
-      ).subscribe();
-    }
-
-  }
-
   @Action(ImagesLoadFirstPageAction)
   onGoToFirstPage(ctx: StateContext<IImagesStateModel>) {
-    const { paginationState } = ctx.getState();
+    const { paginationState, gallery } = ctx.getState();
     const { pageSize, orderByField, begining } = paginationState;
-    return this.schema.queryCollection(ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
+    return this.schema.queryCollection(ref => ref.where('gallery', '==', gallery).limit(pageSize).orderBy(orderByField, 'desc'))
       .get().pipe(
         tap(models => {
           const currentSize = models.docs.length;
@@ -145,9 +128,9 @@ export class ImagesState {
 
   @Action(ImagesLoadNextPageAction)
   onNextPage(ctx: StateContext<IImagesStateModel>) {
-    const { paginationState } = ctx.getState();
+    const { paginationState, gallery } = ctx.getState();
     let { pageSize, last, pagination_count, prev_start_at, first, orderByField } = paginationState;
-    return this.schema.queryCollection(ref => ref.limit(pageSize).orderBy(orderByField, 'desc').startAfter(last))
+    return this.schema.queryCollection(ref => ref.where('gallery', '==', gallery).limit(pageSize).orderBy(orderByField, 'desc').startAfter(last))
       .get().pipe(
         tap(models => {
           const currentSize = models.docs.length;
@@ -180,9 +163,9 @@ export class ImagesState {
 
   @Action(ImagesLoadPreviousPageAction)
   onPreviousPage(ctx: StateContext<IImagesStateModel>) {
-    const { paginationState } = ctx.getState();
+    const { paginationState, gallery } = ctx.getState();
     let { pageSize, orderByField, first, pagination_count, prev_start_at } = paginationState;
-    return this.schema.queryCollection(ref => ref.orderBy(orderByField, 'desc').endBefore(first).limit(pageSize))
+    return this.schema.queryCollection(ref => ref.where('gallery', '==', gallery).orderBy(orderByField, 'desc').endBefore(first).limit(pageSize))
       .get().pipe(
         tap(models => {
           const next = true;
@@ -214,7 +197,6 @@ export class ImagesState {
     
     return this.confirmationDialog.OnConfirm('Are you sure you would like to delete this image?').pipe(
       mergeMap(() => {
-        console.log(path);
         const fileRef = this.storage.refFromURL(path);
         return fileRef.delete();
       }),

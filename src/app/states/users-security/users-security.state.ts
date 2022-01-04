@@ -105,7 +105,6 @@ export class UsersSecurityState {
 
       this.GetUserSecuritySubscription = this.userSecurity.collection$(ref => ref.orderBy('createDate', 'desc')).pipe(
         tap(items => {
-          console.log(items);
           ctx.dispatch(new UserSecuritySetItemsAction(items))
         }),
         delay(250),
