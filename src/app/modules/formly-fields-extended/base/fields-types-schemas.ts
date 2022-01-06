@@ -1,7 +1,6 @@
 import { FormlyFieldConfig, FormlyTemplateOptions } from '@ngx-formly/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FormlyLifeCycleOptions } from '@ngx-formly/core/lib/components/formly.field.config';
-import { IFileUploaderOptions } from '../types/file-uploader/contracts/file-uploader-formly.options';
 import { Observable } from 'rxjs';
 import { getCountryStates } from '../../../utils/country-states';
 import { IFirebaseImageFormlyTemplateOptions } from '../types/firebase-image-formly/firebase-image-formly.module';
@@ -50,7 +49,6 @@ export namespace FieldTypes {
     toolbar: any;
     autogrow: boolean;
     fxHideXs: boolean;
-    fileUploder: IFileUploaderOptions;
     firebaseImageFormlyconfig: IFirebaseImageFormlyTemplateOptions,
     firebaseImageGalleryFormlyconfig: IFirebaseImageGalleryFormlyTemplateOptions,
     matEditorFormlyConfig: IMatEditorFormlyTemplateOptions;
@@ -356,16 +354,6 @@ export namespace FieldTypes {
           }
         }
       }
-    }
-  }
-
-  export class FileUploader extends InputBase {
-    constructor(required: boolean = true, fxFlex: number = 100, templateConfig: Partial<IFileUploaderOptions> = { placeholder: 'Upload Document' }) {
-      super(templateConfig.placeholder, required, fxFlex)
-      this.type = 'formly-file-uploader';
-      this.className = 'formly-file-uploader';
-      this.templateOptions.fileUploder = { ...templateConfig };
-      this.templateOptions.label = 'Document';
     }
   }
 

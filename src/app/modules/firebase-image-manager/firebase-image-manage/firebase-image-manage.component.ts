@@ -1,7 +1,6 @@
 import { Component, EventEmitter, HostBinding, Input, OnDestroy, Output} from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { IImageFirebaseModel } from '@firebase-schemas/images/image.model';
 import { ImagesState } from '@states/images/images.state';
 import { IImagesRemoveRequest } from '@states/images/images.model';
@@ -31,6 +30,7 @@ export type GALLERY_DISPLAY_TYPE = "PRESENTER" | "SELECTION";
 
   @Input() displayType: GALLERY_DISPLAY_TYPE = "PRESENTER";
   @Input() gallery = 'images';
+  @Input() title = 'Image Gallery';
   @Output() onSelectImage = new EventEmitter<string>(null);
   private subscriptions: Subscription[] = [];
 
@@ -42,14 +42,13 @@ export type GALLERY_DISPLAY_TYPE = "PRESENTER" | "SELECTION";
   constructor(
     private store: Store,
     private uploadService: FirebaseImageUploaderService
-    ) {
-    }
+    ) {}
+
 
   onAdd() {
-    const onUp$ = this.uploadService.OnOpen();
+    const onUp$ = this.uploadService.OnOpen({ gallery: this.gallery});
 
     this.subscriptions = [...this.subscriptions, onUp$.subscribe()];
-
   }
 
   removeImage($event: IImagesRemoveRequest) {

@@ -12,6 +12,7 @@ const hasSuperUserPrivilege = () => pipe(customClaims, map((claims: ISecurityTyp
 const hasEditorPrivilege =    () => pipe(customClaims, map((claims: ISecurityTypeInUserSecurityFirebaseModel) => hasAdminLevelPrivilege(claims) || claims.editor));
 const hasBloggerPrivilege = () => pipe(customClaims, map((claims: ISecurityTypeInUserSecurityFirebaseModel) => hasAdminLevelPrivilege(claims) || claims.blogger));
 const hasAnyPrivilege = () => pipe(customClaims, map((claims: ISecurityTypeInUserSecurityFirebaseModel) => hasAdminLevelPrivilege(claims) || claims.blogger || claims.editor));
+const hasStorePrivilege = () => pipe(customClaims, map((claims: ISecurityTypeInUserSecurityFirebaseModel) => hasAdminLevelPrivilege(claims) || claims.sales ));
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
       <Route>{ path: 'navigation-builder', loadChildren: () => import('./navigation/admin-navigation.module').then(m => m.AdminNavigationBuilderModule), ...canActivate(hasEditorPrivilege) },
       <Route>{ path: 'roles', loadChildren: () => import('./roles/admin-role.module').then(m => m.AdminRoleModule), ...canActivate(hasSuperUserPrivilege) },
       <Route>{ path: 'images', loadChildren: () => import('./images/images.module').then(m => m.ImagesModule), ...canActivate(hasAnyPrivilege) },
+      <Route>{ path: 'store', loadChildren: () => import('./store/admin-store.module').then(m => m.AdminStoreModule), ...canActivate(hasStorePrivilege)},
       <Route>{ path: '', component: AdminDashboardComponent}
     ]
   }

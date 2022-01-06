@@ -55,11 +55,14 @@
   }
 
   .detail-row{
-      min-height:100px;
+      min-height:130px;
   }
   .action-submit-container{
       margin-top:20px;
       margin-bottom:20px;
+  }
+  .action-toggles-container {
+    flex-wrap: wrap;
   }
 }
 
@@ -83,6 +86,7 @@
 .action-toggles-container {
   max-width: 500px;
   padding: 7px;
+  flex-wrap: wrap;
 }
 .action-submit-container{
     display:flex;

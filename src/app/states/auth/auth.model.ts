@@ -24,5 +24,6 @@ export interface IAppPrivileges {
   hasAdmin: boolean,
   hasEditor: boolean,
   hasBlogger: boolean
+  hasStore:boolean
 }
 

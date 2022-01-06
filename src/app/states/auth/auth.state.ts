@@ -61,12 +61,13 @@ export class AuthState implements NgxsOnInit {
 
   @Selector()
   static getPrivileges(state: IAuthStateModel): IAppPrivileges {
-    const { superuser, admin, blogger, editor } = state.customClaims;
-    const privileges = {
+    const { superuser, admin, blogger, editor, sales } = state.customClaims;
+    const privileges: IAppPrivileges = {
       hasSuperUser: superuser,
       hasAdmin: superuser || admin,
       hasEditor: superuser || admin || editor,
-      hasBlogger: superuser || admin || blogger
+      hasBlogger: superuser || admin || blogger,
+      hasStore: superuser || sales
     };
     return privileges;
   }

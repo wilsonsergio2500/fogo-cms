@@ -1,28 +1,29 @@
 import { IFireBaseEntity } from '../../firebase/types/firebase-entity';
 
 export interface IUserFirebaseModel extends IFireBaseEntity {
-    name?: string;
-    lastName?: string;
-    email: string;
-    pic: string;
-    bio: string;
+  name?: string;
+  lastName?: string;
+  email: string;
+  pic: string;
+  bio: string;
 
-    phoneNumber: string;
-    photoURL: string;
-    displayName: string;
+  phoneNumber: string;
+  photoURL: string;
+  displayName: string;
 }
 
-export interface IUserSecurityFirebaseModel extends IFireBaseEntity, ISecurityTypeInUserSecurityFirebaseModel  {
-    email: string; 
+export interface IUserSecurityFirebaseModel extends IFireBaseEntity, ISecurityTypeInUserSecurityFirebaseModel {
+  email: string;
 
 }
 
 export interface ISecurityTypeInUserSecurityFirebaseModel {
-    superuser?: boolean;
-    admin?: boolean;
-    editor?: boolean;
-    blogger?: boolean;
-    moderator?: boolean;
+  superuser?: boolean;
+  admin?: boolean;
+  editor?: boolean;
+  blogger?: boolean;
+  moderator?: boolean;
+  sales?: boolean;
 }
 
 export const PrivilegeType = {

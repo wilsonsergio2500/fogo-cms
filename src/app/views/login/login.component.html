@@ -13,12 +13,12 @@
       <form [formGroup]="LoginForm" (ngSubmit)="Submit()">
 
         <mat-form-field class="block">
-          <input matInput type="text" placeholder="Username" formControlName="Username">
+          <input matInput type="text" placeholder="Username" formControlName="Username" autocapitalize="off">
           <mat-error formControlItem="Username"></mat-error>
         </mat-form-field>
 
         <mat-form-field class="block">
-          <input matInput type="Password" placeholder="Password" formControlName="Password">
+          <input matInput type="Password" placeholder="Password" formControlName="Password" autocapitalize="off">
           <mat-error formControlItem="Password"></mat-error>
         </mat-form-field>
 

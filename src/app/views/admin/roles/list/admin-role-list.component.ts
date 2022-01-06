@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { UsersSecurityState } from '../../../../states/users-security/users-security.state';
+import { UsersSecurityState } from '@states/users-security/users-security.state';
 import { Observable } from 'rxjs';
-import { IUserSecurityFirebaseModel } from '../../../../schemas/users/user.model';
+import { IUserSecurityFirebaseModel } from '@firebase-schemas/users/user.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { IUsersSecurityTogglesOnly } from '../../../../states/users-security/users-security.model';
-import { UserSecurityUpdateSecurity } from '../../../../states/users-security/users-security.actions';
+import { IUsersSecurityTogglesOnly } from '@states/users-security/users-security.model';
+import { UserSecurityUpdateSecurity } from '@states/users-security/users-security.actions';
 
 type roleType = 'admin' | 'role' | 'blogger';
 
@@ -54,23 +54,23 @@ export class AdminRoleListComponent {
     const obj = <IUserSecurityFirebaseModel>{};
     obj[$event.source.name as roleType] = $event.checked;
 
-    const { editor, blogger, admin, Id } = row;
+    const { editor, blogger, admin, sales, Id } = row;
 
     let item = this.map.get(row.Id);
     if (item) {
       item = { ...item, ...obj }
       this.map.set(row.Id, item);
     } else {
-      item = { editor, admin, blogger, Id, ...obj };
+      item = { editor, admin, blogger, sales, Id, ...obj };
       this.map.set(row.Id, item);
     }
 
   }
 
   hasSame(row: IUserSecurityFirebaseModel) {
-    const { editor, blogger, admin, Id } = row;
+    const { editor, blogger, admin, sales, Id } = row;
     const mem = this.map.get(row.Id);
-    return !!mem ? (mem.editor == editor && mem.blogger == blogger && mem.admin == admin) : true;
+    return !!mem ? (mem.editor == editor && mem.blogger == blogger && mem.admin == admin && mem.sales == sales) : true;
   }
 
 } 

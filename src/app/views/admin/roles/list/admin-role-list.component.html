@@ -40,14 +40,17 @@
               <mat-cell *matCellDef="let row" data-label="Action" [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
                 <div class="element-detail" fxLayout="column" fxLayout.gt-sm="row">
                   <div fxFlex class="action-toggles-container">
-                    <div fxFlex>
+                    <div fxFlex="50" fxFlex.gt-sm>
                       <mat-slide-toggle name="admin" [ngModel]="row.admin" (change)="toggleChange($event, row)">Admin</mat-slide-toggle>
                     </div>
-                    <div fxFlex>
+                    <div fxFlex="50" fxFlex.gt-sm>
                       <mat-slide-toggle name="editor" [ngModel]="row.editor" (change)="toggleChange($event, row)">Editor</mat-slide-toggle>
                     </div>
-                    <div fxFlex>
+                    <div fxFlex="50" fxFlex.gt-sm>
                       <mat-slide-toggle name="blogger" [ngModel]="row.blogger" (change)="toggleChange($event, row)">Blogger</mat-slide-toggle>
+                    </div>
+                    <div fxFlex="50" fxFlex.gt-sm>
+                      <mat-slide-toggle name="sales" [ngModel]="row.sales" (change)="toggleChange($event, row)">Sales</mat-slide-toggle>
                     </div>
                   </div>
                   <div class="action-submit-container">

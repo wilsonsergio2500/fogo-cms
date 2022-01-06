@@ -9,18 +9,17 @@ import { MaterialComponentsModule } from '../../materialcomponents.module';
 import { AdminRoutingModule } from './admin.routing.module';
 
 @NgModule({
-    declarations: [
-        ...getAdminViewComponents()
-    ],
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        CustomComponentsModule,
-        SharedModule,
-        FirebaseModule,
-        MaterialComponentsModule,
-        AdminRoutingModule,
-    ]
+  declarations: [
+    ...getAdminViewComponents()
+  ],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    CustomComponentsModule,
+    SharedModule,
+    FirebaseModule,
+    MaterialComponentsModule,
+    AdminRoutingModule,
+  ]
 })
-export class AdminModule {
-}
+export class AdminModule {}

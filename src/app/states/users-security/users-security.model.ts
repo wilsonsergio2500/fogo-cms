@@ -14,5 +14,6 @@ export interface IUsersSecurityTogglesOnly {
   admin?: boolean;
   editor?: boolean;
   blogger?: boolean;
+  sales?: boolean;
   Id?: string;
 }

@@ -1,7 +1,7 @@
 import { Store, State, Selector, StateContext, Action } from '@ngxs/store';
 import { IImagesStateModel } from './images.model';
-import { ImagesDone, ImagesLoading, ImagesCreateRecordAction, ImagesLoadFirstPageAction, ImagesLoadNextPageAction, ImagesLoadPreviousPageAction, ImagesRemoveAction, ImagesSetGallery } from './images.actions';
-import { tap, mergeMap, catchError } from 'rxjs/operators';
+import { ImagesDone, ImagesLoading, ImagesCreateRecordAction, ImagesLoadFirstPageAction, ImagesLoadNextPageAction, ImagesLoadPreviousPageAction, ImagesRemoveAction, ImagesSetGallery, ImageClearGallery } from './images.actions';
+import { tap, mergeMap, catchError, filter, finalize } from 'rxjs/operators';
 import { FirebasePaginationStateModel } from '../../firebase/types/firabes-pagination';
 import { IImageFirebaseModel } from '@firebase-schemas/images/image.model';
 import { ImagesFireStore } from '@firebase-schemas/images/image.firebase';
@@ -28,7 +28,6 @@ import { CMS_GALLERY } from './gallery.types';
 export class ImagesState {
 
   private schema: ImagesFireStore;
-  private subscription: Subscription;
   constructor(
     private store: Store,
     private snackBarStatus: SnackbarStatusService,
@@ -76,10 +75,21 @@ export class ImagesState {
 
   @Action(ImagesSetGallery)
   onSetGallery(ctx: StateContext<IImagesStateModel>, action: ImagesSetGallery) {
-
     const { gallery } = action;
     ctx.patchState({ gallery });
-    return ctx.dispatch(new ImagesLoadFirstPageAction());
+
+    return ctx.dispatch(new ImagesLoading())
+      .pipe(
+        mergeMap(() => ctx.dispatch(new ImageClearGallery())),
+        mergeMap(() => ctx.dispatch(new ImagesLoadFirstPageAction()))
+      );
+  }
+
+  @Action(ImageClearGallery)
+  onClearGallery(ctx: StateContext<IImagesStateModel>) {
+    const { paginationState } = ctx.getState();
+    const newPaginationState = { ...paginationState, items: [], next: false, prev:false };
+    ctx.patchState({ paginationState: newPaginationState });
   }
 
   @Action(ImagesCreateRecordAction)
@@ -105,6 +115,7 @@ export class ImagesState {
     const { pageSize, orderByField, begining } = paginationState;
     return this.schema.queryCollection(ref => ref.where('gallery', '==', gallery).limit(pageSize).orderBy(orderByField, 'desc'))
       .get().pipe(
+        filter(models => !!models.docs?.length),
         tap(models => {
           const currentSize = models.docs.length;
           const next = currentSize === pageSize;
@@ -121,7 +132,7 @@ export class ImagesState {
           ctx.patchState({ paginationState: newPaginationState });
           Logger.LogTable(`Firebase Paginate Images[Page:${pagination_count + 1}]`, items);
         }),
-        mergeMap(() => ctx.dispatch(new ImagesDone()))
+        finalize(() => ctx.dispatch(new ImagesDone()))
       )
 
   }

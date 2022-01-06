@@ -15,6 +15,10 @@ export class ImagesSetGallery {
   constructor(public gallery: GalleryType) { }
 }
 
+export class ImageClearGallery {
+  static type = '[Images] Clear Gallery';
+}
+
 export class ImagesCreateRecordAction {
   static type = '[Images] Create Records';
   constructor(public request: IImageFirebaseModel) { }
