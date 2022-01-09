@@ -52,3 +52,22 @@ export const PageCounter = functions.firestore.document('/pages/{Id}').onWrite((
   return;
 
 })
+
+export const UserCounter = functions.firestore.document('/users/{Id}').onWrite((change, context) => {
+
+  const type = 'user';
+  const doc = firebaseAdmin.firestore().collection('metrics').doc('totals');
+
+  if (!change.before.exists) {
+    functions.logger.warn(`increasing ${type} counter`);
+    doc.set({ users: firebaseAdmin.firestore.FieldValue.increment(1) }, { merge: true });
+  } else if (change.before.exists && change.after.exists) {
+    functions.logger.warn(`updated ${type}, no action of updating counter executed`);
+  } else if (!change.after.exists) {
+    functions.logger.warn(`decreasing ${type} counter`);
+    doc.set({ users: firebaseAdmin.firestore.FieldValue.increment(-1) }, { merge: true });
+  }
+
+  return;
+
+})
