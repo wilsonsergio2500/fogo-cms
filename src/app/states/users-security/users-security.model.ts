@@ -1,4 +1,4 @@
-import { IFirebasePaginationState } from '../../firebase/types/firabes-pagination';
+import { IFirebasePaginationState } from '@firebase-module/types/firebase-pagination';
 import { IUserSecurityFirebaseModel } from '../../schemas/users/user.model';
 
 export interface IUsersSecurityStateModel {

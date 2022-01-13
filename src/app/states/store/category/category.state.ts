@@ -8,8 +8,8 @@ import { IStoreCategoryFirebaseModel } from '@firebase-schemas/store/categories/
 import { from, Subscription } from 'rxjs';
 import { StoreCategoryFireStore } from '@firebase-schemas/store/categories/store-categories.firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AuthState } from '../../auth/auth.state';
-import { IFireBaseEntity } from '../../../firebase/types/firebase-entity';
+import { AuthState } from '@states/auth/auth.state';
+import { IFireBaseEntity } from '@firebase-module/types/firebase-entity';
 import { SnackbarStatusService } from '../../../components/ui-elements/snackbar-status/service/snackbar-status.service';
 import { ConfirmationDialogService } from '../../../components/ui-elements/confirmation-dialog/confirmation-dialog.service';
 import { Navigate } from '@ngxs/router-plugin';

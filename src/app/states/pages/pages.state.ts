@@ -5,15 +5,15 @@ import { PageSetAsLoadingAction, PageSetLoadingAsDoneAction, PageLoadItemsAction
 import { tap, mergeMap, catchError, delay } from 'rxjs/operators';
 import { Subscription, from, of, empty } from 'rxjs';
 import { Navigate } from '@ngxs/router-plugin';
-import { FirebasePaginationInMemoryStateModel } from '../../firebase/types/firebase-pagination-inmemory';
+import { FirebasePaginationInMemoryStateModel } from '@firebase-module/types/firebase-pagination-inmemory';
 import { PageFireStore } from '../../schemas/pages/page.firebase';
-import { SnackbarStatusService } from '../../components/ui-elements/snackbar-status/service/snackbar-status.service';
+import { SnackbarStatusService } from '@customComponents/ui-elements/snackbar-status/service/snackbar-status.service';
+import { ConfirmationDialogService } from "@customComponents/ui-elements/confirmation-dialog/confirmation-dialog.service";
 import { IPageFirebaseModel } from '../../schemas/pages/page.model';
-import { AuthState } from '../auth/auth.state';
-import { searchLike } from '../../firebase/utils/search-like';
+import { AuthState } from '@states/auth/auth.state';
+import { searchLike } from '@firebase-module/utils/search-like';
+import { IFireBaseEntity } from "@firebase-module/types/firebase-entity";
 import { Injectable } from '@angular/core';
-import { ConfirmationDialogService } from "../../components/ui-elements/confirmation-dialog/confirmation-dialog.service";
-import { IFireBaseEntity } from "../../firebase/types/firebase-entity";
 
 @State<IPageStateModel>({
   name: 'pagesState',

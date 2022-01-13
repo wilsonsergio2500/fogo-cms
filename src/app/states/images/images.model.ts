@@ -1,4 +1,4 @@
-import { IFirebasePaginationState } from "../../firebase/types/firabes-pagination";
+import { IFirebasePaginationState } from '@firebase-module/types/firebase-pagination';
 import { IImageFirebaseModel } from "@firebase-schemas/images/image.model";
 
 export interface IImagesStateModel {

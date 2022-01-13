@@ -1,4 +1,4 @@
-import { IFirebasePaginationState } from '../../firebase/types/firabes-pagination';
+import { IFirebasePaginationState } from '@firebase-module/types/firebase-pagination';
 import { IPostFirebaseModel } from '../../schemas/posts/post.model';
 
 export interface IPostStateModel {

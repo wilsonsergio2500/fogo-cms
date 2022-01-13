@@ -18,9 +18,12 @@
     ],
     "paths": {
       "@states/*": [ "src/app/states/*" ],
+      "@firebase-module/*": [ "src/app/firebase/*" ],
       "@firebase-schemas/*": [ "src/app/schemas/*" ],
       "@firebase-image/*": [ "src/app/modules/firebase-image/*" ],
-      "@formly-fields-extended/*": [ "src/app/modules/formly-fields-extended/*" ]
+      "@formly-fields-extended/*": [ "src/app/modules/formly-fields-extended/*" ],
+      "@customComponents/*": [ "src/app/components/*" ],
+      "@appUtils/*": [ "src/app/utils/*" ]
     }
   },
   "angularCompilerOptions": {

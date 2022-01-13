@@ -9,7 +9,7 @@ import { INavigationFirebaseModel } from '../../schemas/navigations/navigation.m
 import { NavigationFireStore } from '../../schemas/navigations/navigation.firebase';
 import { Subscription, from } from 'rxjs';
 import { SnackbarStatusService } from '../../components/ui-elements/snackbar-status/service/snackbar-status.service';
-import { AuthState } from '../auth/auth.state';
+import { AuthState } from '@states/auth/auth.state';
 
 
 @State<INavigationStateModel>({

@@ -3,12 +3,12 @@ import { IUsersSecurityStateModel } from './users-security.model';
 import { UsersSecuritySetAsLoadingAction, UsersSecuritySetAsDoneAction, UsersSecurityCreateAction, UserSecurityLoadItemsAction, UserSecuritySetItemsAction, UserSecurityGetPageAction, UserSecurityGetNextPageAction, UserSecurityGetPreviousPageAction, UserSecurityUpdateSecurity } from './users-security.actions';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { tap, mergeMap, delay, catchError } from 'rxjs/operators';
-import { FirebasePaginationStateModel } from '../../firebase/types/firabes-pagination';
+import { FirebasePaginationStateModel } from '@firebase-module/types/firebase-pagination';
 import { IUserSecurityFirebaseModel, ISecurityTypeInUserSecurityFirebaseModel } from '../../schemas/users/user.model';
 import { UserSecurityFireStore } from '../../schemas/users/user.security.firebase';
 import { Subscription, from, of } from 'rxjs';
-import { SnackbarStatusService } from '../../components/ui-elements/snackbar-status/service/snackbar-status.service';
-import { Logger } from '../../utils/logger';
+import { SnackbarStatusService } from '@customComponents/ui-elements/snackbar-status/service/snackbar-status.service';
+import { Logger } from '@appUtils/logger';
 import { Injectable } from '@angular/core';
 
 

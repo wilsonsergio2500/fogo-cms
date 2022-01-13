@@ -2,13 +2,13 @@ import { Store, State, Selector, StateContext, Action } from '@ngxs/store';
 import { IUsersStateModel } from './users.model';
 import { tap, mergeMap, delay, catchError } from 'rxjs/operators';
 import { from, Subscription, of } from 'rxjs';
-import { FirebasePaginationStateModel } from '../../firebase/types/firabes-pagination';
+import { FirebasePaginationStateModel } from '@firebase-module/types/firebase-pagination';
 import { IUserFirebaseModel } from '../../schemas/users/user.model';
 import { UserFireStore } from '../../schemas/users/user.firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { SnackbarStatusService } from '../../components/ui-elements/snackbar-status/service/snackbar-status.service';
+import { SnackbarStatusService } from '@customComponents/ui-elements/snackbar-status/service/snackbar-status.service';
 import { UserSetAsDoneAction, UserSetAsLoadingAction, UserCreateAction, UserLoadItemsAction, UserSetElementsAction, UserGetPageAction, UserGetNextPageAction, UserGetPreviousPageAction } from './users.actions';
-import { Logger } from '../../utils/logger';
+import { Logger } from '@appUtils/logger';
 import { Injectable } from '@angular/core';
 
 @State<IUsersStateModel>({

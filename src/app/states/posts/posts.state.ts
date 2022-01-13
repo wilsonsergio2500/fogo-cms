@@ -5,15 +5,15 @@ import { CreatePostAction, SetPostAsDoneAction, GetPostsAction, SetPostsAction, 
 import { from, Subscription, of } from 'rxjs';
 import { tap, mergeMap, delay, catchError } from 'rxjs/operators';
 import { Navigate } from '@ngxs/router-plugin';
-import { AuthState } from '../auth/auth.state';
+import { AuthState } from '@states/auth/auth.state';
 import { IPostFirebaseModel } from '../../schemas/posts/post.model';
-import { FirebasePaginationStateModel } from '../../firebase/types/firabes-pagination';
-import { SnackbarStatusService } from '../../components/ui-elements/snackbar-status/service/snackbar-status.service';
-import { Logger } from '../../utils/logger';
+import { FirebasePaginationStateModel } from '@firebase-module/types/firebase-pagination';
+import { SnackbarStatusService } from '@customComponents/ui-elements/snackbar-status/service/snackbar-status.service';
+import { ConfirmationDialogService } from '@customComponents/ui-elements/confirmation-dialog/confirmation-dialog.service';
+import { Logger } from '@appUtils/logger';
 import { PostFireStore } from '../../schemas/posts/post.firebase';
 import { Injectable } from '@angular/core';
-import { ConfirmationDialogService } from '../../components/ui-elements/confirmation-dialog/confirmation-dialog.service';
-import { IFireBaseEntity } from '../../firebase/types/firebase-entity';
+import { IFireBaseEntity } from '@firebase-module/types/firebase-entity';
 
 @State({
   name: 'postState',
