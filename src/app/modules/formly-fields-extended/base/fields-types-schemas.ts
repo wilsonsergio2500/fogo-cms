@@ -2,7 +2,7 @@ import { FormlyFieldConfig, FormlyTemplateOptions } from '@ngx-formly/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FormlyLifeCycleOptions } from '@ngx-formly/core/lib/components/formly.field.config';
 import { Observable } from 'rxjs';
-import { getCountryStates } from '../../../utils/country-states';
+import { getCountryStates } from '@appUtils/country-states';
 import { IFirebaseImageFormlyTemplateOptions } from '../types/firebase-image-formly/firebase-image-formly.module';
 import { IMatEditorFormlyTemplateOptions } from '../types/mat-editor-formly/mat-editor-formly.module';
 import { IFirebaseImageGalleryFormlyTemplateOptions } from '../types/firebase-image-gallery-formly/firebase-image-gallery-formly.module';
@@ -376,6 +376,16 @@ export namespace FieldTypes {
         }
       }
       this.templateOptions.description = 'No slashes, spaces or special characters';
+    }
+  }
+
+  export class Slidder extends InputBase {
+    constructor(label: string, required: boolean, min: number, max:number, step: number, fxFlex = 100, config?: Partial<InputBase>) {
+      super(label, required, fxFlex, config)
+      this.type = 'slider';
+      this.templateOptions.min = min;
+      this.templateOptions.max = max;
+      this.templateOptions.step = step;
     }
   }
 

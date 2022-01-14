@@ -13,8 +13,8 @@ export class AdminPageListComponent {
 
   @Select(PageState.IsLoading) working$ : Observable<boolean>;
   @Select(PageState.getPage) records$;
-  @Select(PageState.getCollectionTotalSize) totalSize$;
-  @Select(PageState.getPageSize) pageSize$
+  @Select(PageState.getCollectionTotalSize) totalSize$ : Observable<number>;
+  @Select(PageState.getPageSize) pageSize$: Observable<number>;
 
   constructor(private store: Store) {}
 

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -29,6 +28,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSliderModule } from '@angular/material/slider'
 
 
 const components = [
@@ -60,7 +60,8 @@ const components = [
   MatPaginatorModule,
   MatExpansionModule,
   MatTreeModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatSliderModule
 ];
 
 @NgModule({

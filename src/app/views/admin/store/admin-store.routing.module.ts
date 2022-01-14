@@ -7,7 +7,8 @@ import { AdminStoreImagesResolver } from './images/admin-store-images.resolver';
 const routes: Routes = [
   <Route>{
     path: '', component: AdminStoreComponent, children: [
-      <Route>{ path: 'images', component: AdminStoreImagesComponent, resolve: { action: AdminStoreImagesResolver} }
+      <Route>{ path: 'images', component: AdminStoreImagesComponent, resolve: { action: AdminStoreImagesResolver } },
+      <Route>{ path: 'categories', loadChildren: () => import('./categories/admin-store-categories.module').then(m => m.AdminStoreCategoriesModule) }
     ]
   }
 ];

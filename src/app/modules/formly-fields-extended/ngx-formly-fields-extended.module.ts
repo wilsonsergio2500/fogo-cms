@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { FormlyMatSliderModule } from '@ngx-formly/material/slider';
 import { FormlyMatToggleModule } from './types/toggle/toggle.module';
 import { FormlyMatDatepickerModule } from './types/datepicker/datepicker.module';
 import { FormlyChipTypeModule } from './types/ngx-chip/chip.module';
@@ -34,13 +35,13 @@ import { FormlyFirebaseImageGalleryModule } from './types/firebase-image-gallery
     FormlyModule.forRoot(),
     FormlyFormsFlexModule,
     FormlyMaterialModule,
+    FormlyMatSliderModule,
     FormlyMatToggleModule,
     FormlyMatDatepickerModule,
     FormlyChipTypeModule,
     FormlyMatNumberInputModule,
     FormlyGroupFlexTypeModule,
     FormlyMatEditorModule,
-
     FomlySuffixIconWrapperModule,
     FomlyPrefixIconWrapperModule,
     FirebaseImageFormlyModule,
@@ -50,13 +51,13 @@ import { FormlyFirebaseImageGalleryModule } from './types/firebase-image-gallery
     FormlyModule,
     FormlyFormsFlexModule,
     FormlyMaterialModule,
+    FormlyMatSliderModule,
     FormlyMatToggleModule,
     FormlyMatDatepickerModule,
     FormlyChipTypeModule,
     FormlyMatNumberInputModule,
     FormlyGroupFlexTypeModule,
     FormlyMatEditorModule,
-
     FomlySuffixIconWrapperModule,
     FomlyPrefixIconWrapperModule,
     FirebaseImageFormlyModule,

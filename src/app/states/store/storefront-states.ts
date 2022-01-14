@@ -1,7 +1,7 @@
-import { CategoryState } from "./category/category.state";
+import { StoreCategoryState } from "./category/category.state";
 
 export function getStoreFrontStates() {
   return [
-    CategoryState
+    StoreCategoryState
   ]
 }

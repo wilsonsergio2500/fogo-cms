@@ -1,9 +1,10 @@
-import { IFirebasePaginationInMemoryState } from "../../../firebase/types/firebase-pagination-inmemory";
-import { IStoreCategoryFirebaseModel } from "@firebase-schemas/store/categories/store-categories.model";
+import { IFirebasePaginationInMemoryState } from '@firebase-module/types/firebase-pagination-inmemory';
+import { ICategoryFirebaseModel } from './schema/category.schema';
 
 export interface ICategoryStateModel {
-  loading: boolean;
-  paginationState: IFirebasePaginationInMemoryState<IStoreCategoryFirebaseModel>;
-  current: IStoreCategoryFirebaseModel;
-
+    loading: boolean;
+    paginationState: IFirebasePaginationInMemoryState<ICategoryFirebaseModel>;
+    currentId: string,
+    current: ICategoryFirebaseModel;
+    selected: ICategoryFirebaseModel;
 }
