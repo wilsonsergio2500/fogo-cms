@@ -11,7 +11,7 @@ import { IFireBaseEntity } from '@firebase-module/types/firebase-entity';
 import { CategoryFireStore } from './schema/category.firebase';
 import { ICategoryFirebaseModel } from './schema/category.schema';
 import { ICategoryStateModel } from './category.model';
-import { CategorySetAsLoadingAction, CategorySetAsDoneAction, CategoryCreateAction, CategoryLoadItemsAction, CategorySetPaginatorAction, CategoryPaginateItemsAction, CategoryRemoveAction, CategoryGetByIdAction } from './category.actions';
+import { CategorySetAsLoadingAction, CategorySetAsDoneAction, CategoryCreateAction, CategoryLoadItemsAction, CategorySetPaginatorAction, CategoryPaginateItemsAction, CategoryRemoveAction, CategoryGetByIdAction, CategoryUpdateAction } from './category.actions';
 import { tap, mergeMap, delay } from 'rxjs/operators';
 
 
@@ -164,6 +164,23 @@ export class StoreCategoryState {
       delay(1000),
       mergeMap(() => ctx.dispatch(new CategorySetAsDoneAction()))
     )
+  }
+
+  @Action(CategoryUpdateAction)
+  onUpdateAction(ctx: StateContext<ICategoryStateModel>, action: CategoryUpdateAction) {
+    return this.store.selectOnce(AuthState.getUser).pipe(
+      mergeMap((user) => {
+        const now = Date.now();
+        const metadata = <Partial<IFireBaseEntity>>{ updatedDate: now, updatedBy: user }
+        const form = { ...action.request, ...metadata };
+        return this.schemas.update(action.request.Id, form);
+      }),
+      delay(1000),
+      tap(() => {
+        this.snackBarStatus.OpenComplete('Category Updated Succesfully');
+        ctx.dispatch(new Navigate(['admin/store/categories']));
+      })
+    );
   }
 
 

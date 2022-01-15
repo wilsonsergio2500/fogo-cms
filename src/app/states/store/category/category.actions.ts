@@ -37,3 +37,9 @@ export class CategoryGetByIdAction{
   static type = '[Category] Get By Id';
   constructor(public id: string) { }
 }
+
+export class CategoryUpdateAction {
+  static type = '[Category] Update';
+  constructor(public request: ICategoryFirebaseModel) { }
+
+}

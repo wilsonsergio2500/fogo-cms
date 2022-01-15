@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { FormlyTypeGroup } from '../../../../modules/formly-fields-extended/base/FormlyTypeGroup';
+import { FormlyTypeGroup } from '@formly-fields-extended/base/FormlyTypeGroup';
 import { IPostFirebaseModel } from '@firebase-schemas/posts/post.model';
-import { FieldTypes } from '../../../../modules/formly-fields-extended/base/fields-types-schemas';
+import { FieldTypes } from '@formly-fields-extended/base/fields-types-schemas';
 import { PostState } from '@states/posts/posts.state';
 import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
@@ -17,7 +17,6 @@ export class AdminPostEditComponent implements OnInit, OnDestroy {
 
   @Select(PostState.IsLoading) working$: Observable<boolean>;
   @Select(PostState.getCurrenSelectedRecord) record$: Observable<IPostFirebaseModel>;
-
   formlyGroup: FormlyTypeGroup<IPostFirebaseModel>;
   title = 'Posts';
   btnReadyLabel = 'Update';
@@ -25,10 +24,7 @@ export class AdminPostEditComponent implements OnInit, OnDestroy {
   listPath = "/admin/posts";
   subscriptions: Subscription[] = [];
 
-  constructor(
-    private store: Store
-  ) {
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
 
