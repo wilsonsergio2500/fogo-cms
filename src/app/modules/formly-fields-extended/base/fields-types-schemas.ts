@@ -380,8 +380,8 @@ export namespace FieldTypes {
   }
 
   export class Slidder extends InputBase {
-    constructor(label: string, required: boolean, min: number, max:number, step: number, fxFlex = 100, config?: Partial<InputBase>) {
-      super(label, required, fxFlex, config)
+    constructor(label: string, min: number, max:number, step: number, fxFlex = 100, config?: Partial<InputBase>) {
+      super(label, false, fxFlex, config)
       this.type = 'slider';
       this.templateOptions.min = min;
       this.templateOptions.max = max;

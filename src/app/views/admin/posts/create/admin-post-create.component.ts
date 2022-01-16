@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FieldTypes } from '../../../../modules/formly-fields-extended/base/fields-types-schemas';
-import { FormlyTypeGroup } from '../../../../modules/formly-fields-extended/base/FormlyTypeGroup';
+import { FieldTypes } from '@formly-fields-extended/base/fields-types-schemas';
+import { FormlyTypeGroup } from '@formly-fields-extended/base/FormlyTypeGroup';
 import { Store } from '@ngxs/store';
 import { CreatePostAction } from '@states/posts/posts.actions';
 import { IPostFirebaseModel } from '@firebase-schemas/posts/post.model';
@@ -19,10 +19,7 @@ export class AdminPostCreateComponent implements OnInit {
   btnReadyLabel = 'Create';
   btnLoadingLabel = 'Creating...';
 
-  constructor(
-    private store: Store,
-  ) {
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
 

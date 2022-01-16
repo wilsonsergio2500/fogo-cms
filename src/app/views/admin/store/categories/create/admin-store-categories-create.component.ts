@@ -27,7 +27,7 @@ export class AdminStoreCategoriesCreateComponent implements OnInit {
       name: new FieldTypes.InputField('Name', true),
       image: new FieldTypes.FirebaseImageGalleryUploader('Image', true, 100),
       excerpt: new FieldTypes.MatEditor('Excerpt', true, 100, { placeholder: 'Insert excerpt or description...', hasSideBar: false }),
-      rank: new FieldTypes.Slidder('Rank', true, 1, 10, 1, 100, { templateOptions: { thumbLabel: true } })
+      rank: new FieldTypes.Slidder('Rank', 1, 10, 1, 100, { templateOptions: { thumbLabel: true } })
     })
 
   }

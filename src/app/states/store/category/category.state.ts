@@ -64,6 +64,11 @@ export class StoreCategoryState {
   }
 
   @Selector()
+  static getItems(state: ICategoryStateModel): ICategoryFirebaseModel[] {
+    return state.paginationState.items;
+  }
+
+  @Selector()
   static getCurrent(state: ICategoryStateModel) : ICategoryFirebaseModel {
     return state.current;
   }
