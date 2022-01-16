@@ -8,7 +8,8 @@ const routes: Routes = [
   <Route>{
     path: '', component: AdminStoreComponent, children: [
       <Route>{ path: 'images', component: AdminStoreImagesComponent, resolve: { action: AdminStoreImagesResolver } },
-      <Route>{ path: 'categories', loadChildren: () => import('./categories/admin-store-categories.module').then(m => m.AdminStoreCategoriesModule) }
+      <Route>{ path: 'categories', loadChildren: () => import('./categories/admin-store-categories.module').then(m => m.AdminStoreCategoriesModule) },
+      <Route>{ path: 'products', loadChildren: () => import('./products/admin-store-product.module').then(m => m.AdminStoreProductModule)}
     ]
   }
 ];

@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
-import { getAdminComponents, getProviders } from './elements';
+import { getComponents, getProviders } from './elements';
 import { AdminRoleRoutingModule } from './admin-role.routing.module';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CustomComponentsModule } from '../../../components/components.module';
+import { CustomComponentsModule } from '@customComponents/components.module';
 import { SharedModule } from '../../../shared.module';
-import { FirebaseModule } from '../../../firebase/firebase.module';
+import { FirebaseModule } from '@firebase-module/firebase.module';
 import { MaterialComponentsModule } from '../../../materialcomponents.module';
 
 @NgModule({
-    declarations: [
-        ...getAdminComponents()
-    ],
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        CustomComponentsModule,
-        SharedModule,
-        FirebaseModule,
-        MaterialComponentsModule,
-        AdminRoleRoutingModule
-    ],
-    providers: [
-        ...getProviders()
-    ]
+  declarations: [
+    ...getComponents()
+  ],
+  providers: [
+    ...getProviders()
+  ],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    CustomComponentsModule,
+    SharedModule,
+    FirebaseModule,
+    MaterialComponentsModule,
+    AdminRoleRoutingModule
+  ]
 })
-export class AdminRoleModule {}
+export class AdminRoleModule { }

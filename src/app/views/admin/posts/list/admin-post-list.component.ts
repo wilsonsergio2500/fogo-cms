@@ -18,10 +18,7 @@ export class AdminPostListComponent {
   @Select(PostState.getPreviousEnabled) prev$: Observable<boolean>;
   @Select(PostState.IsPaginatorEnabled) paginationEnabled$: Observable<boolean>;
 
-  constructor(
-    private store: Store
-  ) {
-  }
+  constructor(private store: Store) {}
 
   onNextPage() {
     this.store.dispatch(new PostNextPage())

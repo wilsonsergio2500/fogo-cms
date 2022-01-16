@@ -82,3 +82,21 @@ export const StoreCategoryCounter = functions.firestore.document('/store-categor
   }
   return;
 })
+
+
+export const StoreProductCounter = functions.firestore.document('/store-products/{Id}').onWrite((change, context) => {
+
+  const type = 'store-products';
+  const doc = firebaseAdmin.firestore().collection('metrics').doc('totals');
+
+  if (!change.before.exists) {
+    functions.logger.warn(`increasing ${type} counter`);
+    doc.set({ storeProducts: firebaseAdmin.firestore.FieldValue.increment(1) }, { merge: true });
+  } else if (change.before.exists && change.after.exists) {
+    functions.logger.warn(`updated ${type}, no action of updating counter executed`);
+  } else if (!change.after.exists) {
+    functions.logger.warn(`decreasing ${type} counter`);
+    doc.set({ storeProducts: firebaseAdmin.firestore.FieldValue.increment(-1) }, { merge: true });
+  }
+  return;
+})

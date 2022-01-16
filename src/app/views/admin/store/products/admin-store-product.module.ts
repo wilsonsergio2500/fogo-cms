@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
-import { AdminPageRoutingModule } from './admin-page.routing.module';
 import { CommonModule } from '@angular/common';
+import { AdminStoreProductRoutingModule } from './admin-store-product.routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomComponentsModule } from '@customComponents/components.module';
-import { SharedModule } from '../../../shared.module';
+import { SharedModule } from '../../../../shared.module';
 import { FirebaseModule } from '@firebase-module/firebase.module';
-import { MaterialComponentsModule } from '../../../materialcomponents.module';
+import { MaterialComponentsModule } from '../../../../materialcomponents.module';
 import { getComponents, getProviders } from './elements';
-
 
 @NgModule({
   declarations: [
-    ...getComponents()
+    ...getComponents(),
   ],
   providers: [
     ...getProviders()
@@ -23,8 +22,7 @@ import { getComponents, getProviders } from './elements';
     SharedModule,
     FirebaseModule,
     MaterialComponentsModule,
-    AdminPageRoutingModule
-  ],
-
+    AdminStoreProductRoutingModule
+  ]
 })
-export class AdminPageModule { }
+export class AdminStoreProductModule { }

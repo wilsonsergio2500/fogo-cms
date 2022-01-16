@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CustomComponentsModule } from '../../../components/components.module';
+import { CustomComponentsModule } from '@customComponents/components.module';
 import { SharedModule } from '../../../shared.module';
-import { FirebaseModule } from '../../../firebase/firebase.module';
+import { FirebaseModule } from '@firebase-module/firebase.module';
 import { MaterialComponentsModule } from '../../../materialcomponents.module';
 import { AdminPostRoutingModule } from './admin-post.routing.module'
-import { getAdminComponents, getAdminProviders } from './elements';
+import { getComponents, getProviders } from './elements';
 
 @NgModule({
-    declarations: [
-        ...getAdminComponents()
-    ],
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        CustomComponentsModule,
-        SharedModule,
-        FirebaseModule,
-        MaterialComponentsModule,
-        AdminPostRoutingModule
-    ],
-    providers: [
-        ...getAdminProviders()
-    ]
+  declarations: [
+    ...getComponents()
+  ],
+  providers: [
+    ...getProviders()
+  ],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    CustomComponentsModule,
+    SharedModule,
+    FirebaseModule,
+    MaterialComponentsModule,
+    AdminPostRoutingModule
+  ]
 })
-export class AdminPostModule {}
+export class AdminPostModule { }
