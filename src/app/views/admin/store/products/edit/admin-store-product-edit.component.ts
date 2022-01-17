@@ -1,24 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { FormlyTypeGroup } from '@formly-fields-extended/base/FormlyTypeGroup';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subscription } from 'rxjs';
+import { StoreProductState } from '@states/store/product/product.state';
 import { IProductFirebaseModel } from '@states/store/product/schema/product.schema';
+import { FormlyTypeGroup } from '@formly-fields-extended/base/FormlyTypeGroup';
 import { FieldTypes } from '@formly-fields-extended/base/fields-types-schemas';
 import { StoreCategoryState } from '@states/store/category/category.state';
-import { map } from 'rxjs/operators';
-import { ProductCreateAction } from '@states/store/product/product.actions';
+import { filter, map, tap } from 'rxjs/operators';
+import { ProductUpdateAction } from '@states/store/product/product.actions';
+
 
 @Component({
-  selector: 'admin-store-product-create',
-  templateUrl: 'admin-store-product-create.component.html',
-  styleUrls: [`admin-store-product-create.component.scss`]
+  selector: 'admin-store-product-edit',
+  templateUrl: 'admin-store-product-edit.component.html',
+  styleUrls: [`admin-store-product-edit.component.scss`]
 })
-export class AdminStoreProductCreateComponent implements OnInit {
+export class AdminStoreProductEditComponent implements OnInit, OnDestroy {
 
+
+  @Select(StoreProductState.IsLoading) working$: Observable<boolean>;
+  @Select(StoreProductState.getCurrent) record$: Observable<IProductFirebaseModel>;
   formlyGroup: FormlyTypeGroup<IProductFirebaseModel>;
+  title = 'Categories';
+  btnReadyLabel = 'Update';
+  btnLoadingLabel = 'Updating...';
   listPath = "/admin/store/products";
-  title = 'Products';
-  btnReadyLabel = 'Create';
-  btnLoadingLabel = 'Creating...';
+  subscriptions: Subscription[] = [];
 
   constructor(private store: Store) { }
 
@@ -70,11 +77,26 @@ export class AdminStoreProductCreateComponent implements OnInit {
       about: new FieldTypes.MatEditor('Aboout', false, 100, { placeholder: 'Insert more Information about this product...' })
     });
 
+    const value$ = this.record$.pipe(
+      filter(_ => !!_),
+      tap(({ Id, name, publish, image, excerpt, description, price, quantity, deal, originalPrice, category, rank, about }) => {
+        this.formlyGroup.setModel({ Id, name, publish, image, excerpt, description, price, quantity, deal, originalPrice, category, rank, about  })
+      })
+    );
+
+    this.subscriptions = [...this.subscriptions, value$.subscribe()];
+
   }
 
   formSubmit() {
     this.formlyGroup.markAsBusy();
-    this.store.dispatch(new ProductCreateAction({ ...this.formlyGroup.model }))
+    this.store.dispatch(new ProductUpdateAction({ ...this.formlyGroup.model }));
+  }
+
+  ngOnDestroy() {
+    if (this.subscriptions?.length) {
+      this.subscriptions.forEach(s => s.unsubscribe());
+    }
   }
 
 }
