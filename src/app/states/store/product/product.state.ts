@@ -107,7 +107,7 @@ export class StoreProductState {
       }),
       tap(() => {
         this.snackBarStatus.OpenComplete('Product Succesfully Created');
-        ctx.dispatch(new Navigate(['admin/Product']));
+        ctx.dispatch(new Navigate(['/admin/store/products']));
       })
     );
   }
@@ -124,7 +124,7 @@ export class StoreProductState {
       delay(1000),
       tap(() => {
         this.snackBarStatus.OpenComplete('Product Updated Succesfully');
-        ctx.dispatch(new Navigate(['admin/Product']));
+        ctx.dispatch(new Navigate(['/admin/store/products']));
       })
     );
   }

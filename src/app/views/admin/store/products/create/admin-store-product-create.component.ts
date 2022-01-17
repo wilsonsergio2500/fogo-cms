@@ -35,8 +35,8 @@ export class AdminStoreProductCreateComponent implements OnInit {
 
     const LessThanSalesPrice = {
       expression: ({ value: originalPrice }, { model }) => {
-        const { price } = model as IProductFirebaseModel;
-        return (originalPrice > price);
+        const { price, deal } = model as IProductFirebaseModel;
+        return (deal) ? (originalPrice > price) : true;
       },
       message: (error, field) => {
         return `${field.templateOptions.label} mus be greater than sales Price (For Deals)`;
@@ -54,7 +54,7 @@ export class AdminStoreProductCreateComponent implements OnInit {
       price: new FieldTypes.NumberField('Price', true, 50, { validators: { greaterThanZero }, templateOptions: { fxFlexXs: 50 } }),
       quantity: new FieldTypes.NumberField('Quantity', true, 50, { templateOptions: { fxFlexXs: 50 } }),
       deal: new FieldTypes.ToogleField('Deal', 100),
-      originalPrice: new FieldTypes.NumberField('Original Price', true, 100, {
+      originalPrice: new FieldTypes.NumberField('Original Price', false, 100, {
         validators: { greaterThanZero, LessThanSalesPrice },
         expressionProperties: {
           'className': (model: IProductFirebaseModel) => {
@@ -67,8 +67,10 @@ export class AdminStoreProductCreateComponent implements OnInit {
       }),
       category: new FieldTypes.SelectField('Category', true, 100, categoryList$),
       rank: new FieldTypes.Slidder('Rank', 1, 10, 1, 100, { templateOptions: { thumbLabel: true } }),
-      about: new FieldTypes.MatEditor('Aboout', true, 100, { placeholder: 'Insert more Information about this product...' })
-    })
+      about: new FieldTypes.MatEditor('Aboout', false, 100, { placeholder: 'Insert more Information about this product...' })
+    });
+
+    console.log(this.formlyGroup);
   }
 
   formSubmit() {
