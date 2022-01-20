@@ -23,8 +23,7 @@ export class PublicComponent implements OnInit, OnDestroy {
     private media: MediaMatcher,
     private changeDetectorRef: ChangeDetectorRef,
     private store: Store
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');

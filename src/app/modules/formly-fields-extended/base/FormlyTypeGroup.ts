@@ -14,7 +14,7 @@ export class FormlyTypeGroup<T = any> implements IFormlyTypeGroup<T> {
   IsBusy: boolean = false;
 
   constructor(config?: { [p in keyof T]: FormlyFieldConfig })
-    constructor(config?: { [p in keyof T]: FormlyFieldConfig }, ops: IFormlyTypeGroup<T> = {}, ) {
+  constructor(config?: { [p in keyof T]: FormlyFieldConfig }, ops: IFormlyTypeGroup<T> = {},) {
     this.model = ops && ops.model || <T>{};
     this.options = ops && ops.options || <FormlyFormOptions>{};
     this.form = ops && ops.form || new FormGroup({});
@@ -81,13 +81,13 @@ export class FormlyTypeGroup<T = any> implements IFormlyTypeGroup<T> {
     this.model = model;
   }
 
-    get(key: keyof T) {
-        return this.form.get(key as string);
-    }
+  get(key: keyof T) {
+    return this.form.get(key as string);
+  }
 
-    patchValue(model: Partial<T>) {
-        this.model = { ...this.model, ...model }
-    }
+  patchValue(model: Partial<T>) {
+    this.model = { ...this.model, ...model }
+  }
 
   setFields(config: { [p in keyof T]: FormlyFieldConfig }) {
 
@@ -99,7 +99,7 @@ export class FormlyTypeGroup<T = any> implements IFormlyTypeGroup<T> {
         formlyConfig.key = key;
         fields.push(formlyConfig);
       });
-        this.fields = [...fields];
+      this.fields = [...fields];
     }
 
   }
@@ -124,7 +124,7 @@ export class FormlyTypeGroup<T = any> implements IFormlyTypeGroup<T> {
 
     const titleTemplate = <FormlyFieldConfig>{
       template: `<h3>${title}</h3>`,
-      templateOptions: { fxFlex: 100}
+      templateOptions: { fxFlex: 100 }
     }
 
     if (!!config) {
@@ -139,7 +139,7 @@ export class FormlyTypeGroup<T = any> implements IFormlyTypeGroup<T> {
       const Group = [titleTemplate, ...fields];
       this.fields = [...this.fields, ...Group];
     }
-    
+
   }
 
 }

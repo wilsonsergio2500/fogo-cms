@@ -8,6 +8,7 @@ import { FieldTypes } from '@formly-fields-extended/base/fields-types-schemas';
 import { StoreCategoryState } from '@states/store/category/category.state';
 import { filter, map, tap } from 'rxjs/operators';
 import { ProductUpdateAction } from '@states/store/product/product.actions';
+import { deepCopy } from '@appUtils/deep-copy';
 
 
 @Component({
@@ -80,7 +81,8 @@ export class AdminStoreProductEditComponent implements OnInit, OnDestroy {
     const value$ = this.record$.pipe(
       filter(_ => !!_),
       tap(({ Id, name, publish, image, excerpt, description, price, quantity, deal, originalPrice, category, rank, about }) => {
-        this.formlyGroup.setModel({ Id, name, publish, image, excerpt, description, price, quantity, deal, originalPrice, category, rank, about  })
+        const payload = { Id, name, publish, image, excerpt, description, price, quantity, deal, originalPrice, category, rank, about };
+        this.formlyGroup.patchValue(deepCopy(payload));
       })
     );
 
