@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction:column;
+  align-items:center;
+
+  @media(min-width: 1280px) {
+    .store-container{
+        width:1200px;
+    }
+  }
+}

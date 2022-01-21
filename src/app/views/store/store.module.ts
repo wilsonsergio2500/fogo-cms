@@ -6,12 +6,15 @@ import { CustomComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared.module';
 import { FirebaseModule } from '../../firebase/firebase.module';
 import { MaterialComponentsModule } from '../../materialcomponents.module';
-import { getComponents } from './elements';
+import { getComponents, getProviders } from './elements';
 
 
 @NgModule({
   declarations: [
     ...getComponents()
+  ],
+  providers: [
+    ...getProviders()
   ],
   imports: [
     CommonModule,

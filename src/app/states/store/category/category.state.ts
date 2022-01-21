@@ -11,7 +11,7 @@ import { IFireBaseEntity } from '@firebase-module/types/firebase-entity';
 import { CategoryFireStore } from './schema/category.firebase';
 import { ICategoryFirebaseModel } from './schema/category.schema';
 import { ICategoryStateModel } from './category.model';
-import { CategorySetAsLoadingAction, CategorySetAsDoneAction, CategoryCreateAction, CategoryLoadItemsAction, CategorySetPaginatorAction, CategoryPaginateItemsAction, CategoryRemoveAction, CategoryGetByIdAction, CategoryUpdateAction } from './category.actions';
+import { CategorySetAsLoadingAction, CategorySetAsDoneAction, CategoryCreateAction, CategoryLoadItemsAction, CategorySetPaginatorAction, CategoryPaginateItemsAction, CategoryRemoveAction, CategoryGetByIdAction, CategoryUpdateAction, CategorySetOrderByFieldAction } from './category.actions';
 import { tap, mergeMap, delay } from 'rxjs/operators';
 
 
@@ -106,6 +106,20 @@ export class StoreCategoryState {
         ctx.dispatch(new Navigate(['admin/store/categories']));
       })
     );
+  }
+
+  @Action(CategorySetOrderByFieldAction)
+  onUpdateOrderByField(ctx: StateContext<ICategoryStateModel>, action: CategorySetOrderByFieldAction) {
+    const { orderByField  } = action;
+    const { paginationState } = ctx.getState();
+    const { orderByField: currentOrderByField } = paginationState
+    const changed = orderByField != currentOrderByField;
+    const newPaginationState = { ...paginationState, orderByField };
+    ctx.patchState({ paginationState: newPaginationState });
+    if (changed) {
+      this.subscription = null;
+      ctx.dispatch(new CategoryLoadItemsAction());
+    }
   }
 
   @Action(CategoryLoadItemsAction)
