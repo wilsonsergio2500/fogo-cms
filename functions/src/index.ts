@@ -100,3 +100,27 @@ export const StoreProductCounter = functions.firestore.document('/store-products
   }
   return;
 })
+
+export const StoreProductCategoryCounter = functions.firestore.document('/store-categories-products/{category}/products/{Id}').onWrite((change, context) => {
+
+  const { category } = context.params;
+
+  let categories: { [key: string]: number | FirebaseFirestore.FieldValue } = {};
+  categories[category] = 0;
+
+  const type = 'store-category-products';;
+  const doc = firebaseAdmin.firestore().collection('metrics').doc('totals');
+
+  if (!change.before.exists) {
+    functions.logger.warn(`increasing ${type} category:${category} counter`);
+    categories[category] = firebaseAdmin.firestore.FieldValue.increment(1)
+    doc.set({ categories }, { merge: true });
+  } else if (change.before.exists && change.after.exists) {
+    functions.logger.warn(`updated ${type}, no action of updating counter executed`);
+  } else if (!change.after.exists) {
+    functions.logger.warn(`decreasing ${type} category:${category} counter`);
+    categories[category] = firebaseAdmin.firestore.FieldValue.increment(-1)
+    doc.set({ categories }, { merge: true });
+  }
+  return;
+})

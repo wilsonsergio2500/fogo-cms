@@ -12,6 +12,7 @@ import { ProductFireStore } from './schema/product.firebase';
 import { IProductFirebaseModel } from './schema/product.schema';
 import { IProductStateModel } from './product.model';
 import { ProductSetAsLoadingAction, ProductSetAsDoneAction, ProductCreateAction, ProductUpdateAction, ProductRemoveAction, ProductGetByIdAction, ProductLoadFirstPageAction, ProductLoadNextPageAction, ProductLoadPreviousPageAction, ProductSetOrderByFieldAction, ProductSetCategoryFilterAction } from './product.actions';
+import { CategoryProductCreateAction, CategoryProductRemoveAction } from '@states/store/category-product/category-product.actions';
 import { tap, mergeMap, delay, filter, finalize, catchError } from 'rxjs/operators';
 import { Logger } from '@appUtils/logger';
 
@@ -104,9 +105,10 @@ export class StoreProductState {
         const now = Date.now();
         const metadata = <Partial<IFireBaseEntity>>{ createDate: now, updatedDate: now, updatedBy: user, createdBy: user }
         const form = { ...action.request, ...metadata };
-        return from(this.schemas.create(form))
+        return from(this.schemas.create(form));
       }),
-      tap(() => {
+      mergeMap(form => ctx.dispatch(new CategoryProductCreateAction(form))),
+      tap((t) => {
         this.snackBarStatus.OpenComplete('Product Succesfully Created');
         ctx.dispatch(new Navigate(['/admin/store/products']));
       })
@@ -134,7 +136,7 @@ export class StoreProductState {
         const now = Date.now();
         const metadata = <Partial<IFireBaseEntity>>{ updatedDate: now, updatedBy: user }
         const form = { ...action.request, ...metadata };
-        return this.schemas.update(action.request.Id, form);
+        return from(this.schemas.update(action.request.Id, form)).pipe(mergeMap(() => ctx.dispatch(new CategoryProductCreateAction(form))));
       }),
       delay(1000),
       tap(() => {
@@ -148,7 +150,7 @@ export class StoreProductState {
   onRemove(ctx: StateContext<IProductStateModel>, action: ProductRemoveAction) {
     const { Id } = action.request;
     return this.confirmationDialog.OnConfirm('Are you sure you would like to delete this Product?').pipe(
-      mergeMap(() => from(this.schemas.delete(Id))),
+      mergeMap(() => from(this.schemas.delete(Id)).pipe(mergeMap(() => ctx.dispatch(new CategoryProductRemoveAction(action.request))))),
       tap(() => this.snackBarStatus.OpenComplete('Product has been Removed')),
     )
   }

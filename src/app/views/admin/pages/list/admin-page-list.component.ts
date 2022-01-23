@@ -15,6 +15,7 @@ export class AdminPageListComponent {
   @Select(PageState.getPage) records$;
   @Select(PageState.getCollectionTotalSize) totalSize$ : Observable<number>;
   @Select(PageState.getPageSize) pageSize$: Observable<number>;
+  @Select(PageState.getPageIndex) pageIndex$: Observable<number>;
 
   constructor(private store: Store) {}
 

@@ -12,7 +12,7 @@
     "e2e": "ng e2e",
     "install:admin-tasks": "cd ./admin-tasks && npm install",
     "do:admin-tasks": "cd ./admin-tasks && npm run add-users",
-    "deploy:firebase-rules": "firebase deploy --only firestore:rules",
+    "deploy:firestore-rules": "firebase deploy --only firestore:rules",
     "deploy:firebase-indexes": "firebase deploy --only firestore:indexes",
     "deploy:firebase-functions": "firebase deploy --only functions",
     "build-dev": "ng build",

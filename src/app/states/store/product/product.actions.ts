@@ -55,3 +55,7 @@ export class ProductSetCategoryFilterAction {
   static type = '[Product] Set Category Filter';
   constructor(public category: string) {}
 }
+
+export class ProductByCategoryLoadFirstPageAction {
+
+}

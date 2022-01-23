@@ -53,7 +53,7 @@
           </mat-table>
 
           <ng-container *ngIf="(totalSize$ | async) > (pageSize$ | async)">
-              <mat-paginator [length]="totalSize$ | async" (page)="pageEvent = onPageEvent($event)"
+              <mat-paginator [length]="totalSize$ | async" (page)="pageEvent = onPageEvent($event)" [pageIndex]="pageIndex$ | async"
                            [pageSize]="pageSize$ | async"
                            [pageSizeOptions]="[5, 10, 25]">
                 </mat-paginator>
