@@ -17,6 +17,7 @@ export class AdminStoreCategoriesListComponent {
   @Select(StoreCategoryState.getCurrentPage) records$: Observable<ICategoryFirebaseModel[]>;
   @Select(StoreCategoryState.getCollectionTotalSize) totalSize$: Observable<number>;
   @Select(StoreCategoryState.getPageSize) pageSize$: Observable<number>;
+  @Select(StoreCategoryState.getPageIndex) pageIndex$: Observable<number>;
 
   constructor(private store: Store) { }
 

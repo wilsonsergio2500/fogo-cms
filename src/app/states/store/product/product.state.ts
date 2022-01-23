@@ -11,61 +11,62 @@ import { IFireBaseEntity } from '@firebase-module/types/firebase-entity';
 import { ProductFireStore } from './schema/product.firebase';
 import { IProductFirebaseModel } from './schema/product.schema';
 import { IProductStateModel } from './product.model';
-import { ProductSetAsLoadingAction, ProductSetAsDoneAction, ProductCreateAction, ProductUpdateAction, ProductRemoveAction, ProductGetByIdAction, ProductLoadFirstPageAction, ProductLoadNextPageAction, ProductLoadPreviousPageAction } from './product.actions';
+import { ProductSetAsLoadingAction, ProductSetAsDoneAction, ProductCreateAction, ProductUpdateAction, ProductRemoveAction, ProductGetByIdAction, ProductLoadFirstPageAction, ProductLoadNextPageAction, ProductLoadPreviousPageAction, ProductSetOrderByFieldAction, ProductSetCategoryFilterAction } from './product.actions';
 import { tap, mergeMap, delay, filter, finalize, catchError } from 'rxjs/operators';
 import { Logger } from '@appUtils/logger';
 
 
 @State<IProductStateModel>({
-    name: 'productState',
-    defaults: <IProductStateModel>{
-        loading: false,
-        paginationState: new FirebasePaginationStateModel<IProductFirebaseModel>(),
-        currentId: null,
-        current: null,
-        selected: null
-    }
+  name: 'productState',
+  defaults: <IProductStateModel>{
+    loading: false,
+    paginationState: new FirebasePaginationStateModel<IProductFirebaseModel>(),
+    currentId: null,
+    current: null,
+    selected: null,
+    category: null,
+  }
 })
 @Injectable()
 export class StoreProductState {
 
-    private schemas: ProductFireStore;
-    private subscription: Subscription;
-    constructor(
-        private store: Store,
-        private snackBarStatus: SnackbarStatusService,
-        private confirmationDialog: ConfirmationDialogService,
-        angularFireStore: AngularFirestore
-    ){
-      this.schemas = new ProductFireStore(angularFireStore);
-    }
+  private schemas: ProductFireStore;
+  private subscription: Subscription;
+  constructor(
+    private store: Store,
+    private snackBarStatus: SnackbarStatusService,
+    private confirmationDialog: ConfirmationDialogService,
+    angularFireStore: AngularFirestore
+  ) {
+    this.schemas = new ProductFireStore(angularFireStore);
+  }
 
   @Selector()
-  static IsLoading(state: IProductStateModel) : boolean {
+  static IsLoading(state: IProductStateModel): boolean {
     return state.loading;
   }
 
   @Selector()
-  static getPage(state: IProductStateModel) : IProductFirebaseModel[] {
+  static getPage(state: IProductStateModel): IProductFirebaseModel[] {
     return state.paginationState.items;
   }
 
   @Selector()
-  static getPageSize(state: IProductStateModel) : number {
+  static getPageSize(state: IProductStateModel): number {
     return state.paginationState.pageSize;
   }
 
   @Selector()
-  static getCollectionTotalSize(state: IProductStateModel) : number {
+  static getCollectionTotalSize(state: IProductStateModel): number {
     return state.paginationState.items.length;
   }
 
   @Selector()
-  static getNextEnabled(state: IProductStateModel) : boolean {
+  static getNextEnabled(state: IProductStateModel): boolean {
     return state.paginationState.next;
   }
   @Selector()
-  static getPreviousEnabled(state: IProductStateModel) : boolean {
+  static getPreviousEnabled(state: IProductStateModel): boolean {
     return state.paginationState.prev;
   }
   @Selector()
@@ -74,25 +75,25 @@ export class StoreProductState {
   }
 
   @Selector()
-  static getCurrent(state: IProductStateModel) : IProductFirebaseModel {
+  static getCurrent(state: IProductStateModel): IProductFirebaseModel {
     return state.current;
   }
 
   @Selector()
-  static getSelected(state: IProductStateModel) : IProductFirebaseModel {
+  static getSelected(state: IProductStateModel): IProductFirebaseModel {
     return state.selected;
   }
 
   @Action(ProductSetAsDoneAction)
- onDone(ctx: StateContext<IProductStateModel>) {
+  onDone(ctx: StateContext<IProductStateModel>) {
     ctx.patchState({
-        loading: false
+      loading: false
     });
   }
   @Action(ProductSetAsLoadingAction)
   onLoading(ctx: StateContext<IProductStateModel>) {
     ctx.patchState({
-        loading: true
+      loading: true
     });
   }
 
@@ -110,6 +111,20 @@ export class StoreProductState {
         ctx.dispatch(new Navigate(['/admin/store/products']));
       })
     );
+  }
+
+  @Action(ProductSetOrderByFieldAction)
+  onUpdateOrderByField(ctx: StateContext<IProductStateModel>, action: ProductSetOrderByFieldAction) {
+    const { orderByField } = action;
+    const { paginationState } = ctx.getState();
+    const { orderByField: currentOrderByField } = paginationState
+    const changed = orderByField != currentOrderByField;
+    const newPaginationState = { ...paginationState, orderByField };
+    ctx.patchState({ paginationState: newPaginationState });
+    if (changed) {
+      this.subscription = null;
+      ctx.dispatch(new ProductLoadFirstPageAction());
+    }
   }
 
   @Action(ProductUpdateAction)
@@ -139,7 +154,7 @@ export class StoreProductState {
   }
 
   @Action(ProductGetByIdAction)
-  onGetById(ctx: StateContext<IProductStateModel>, action: ProductGetByIdAction){
+  onGetById(ctx: StateContext<IProductStateModel>, action: ProductGetByIdAction) {
     const { id: currentId } = action;
     ctx.dispatch(new ProductSetAsLoadingAction());
     return from(this.schemas.queryCollection(ref => ref.where('Id', '==', currentId)).get()).pipe(
@@ -156,7 +171,7 @@ export class StoreProductState {
 
   @Action(ProductLoadFirstPageAction)
   onGoToFirstPage(ctx: StateContext<IProductStateModel>) {
-    const { paginationState  } = ctx.getState();
+    const { paginationState } = ctx.getState();
     const { pageSize, orderByField, begining } = paginationState;
     ctx.dispatch(new ProductSetAsLoadingAction());
     return this.schemas.queryCollection(ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
@@ -247,7 +262,11 @@ export class StoreProductState {
       )
   }
 
-
+  @Action(ProductSetCategoryFilterAction)
+  onSetCategoryFilter(ctx: StateContext<IProductStateModel>, action: ProductSetCategoryFilterAction) {
+    const { category } = action;
+    ctx.patchState({ category })
+  }
 
 
 }

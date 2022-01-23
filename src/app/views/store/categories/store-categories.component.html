@@ -1,6 +1,6 @@
 <div class="store-container">
 
-  <h2>Product Categories</h2>
+  <h2 class="page-title">Product Categories</h2>
 
   <div fxLayout="column" fxLayoutAlign="start center" [ngStyle]="{'padding-top.px': 30}" *ngIf="working$ | async as loading; else done">
     <mat-progress-spinner mode="indeterminate" [diameter]="30" [strokeWidth]="2"></mat-progress-spinner>
@@ -24,10 +24,15 @@
           <ng-container *ngFor="let item of items">
 
             <div class="product-category-item">
-              <div class="image-container">
-                <img *ngIf="item.image" src="{{item.image}}" />
+              <div class="produc-category-card">
+                <div class="product-image-container">
+                  <img *ngIf="item.image" src="{{item.image}}" />
+                </div>
+                <div class="product-category-info">
+                  <a mat-button class="font-branded" color="primary" aria-label="category">{{item.name}}</a>
+                </div>
               </div>
-              <h3>{{item.name}}</h3>
+             
             </div>
 
           </ng-container>

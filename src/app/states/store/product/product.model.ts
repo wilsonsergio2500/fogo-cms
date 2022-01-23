@@ -2,9 +2,10 @@ import { IFirebasePaginationState } from '@firebase-module/types/firebase-pagina
 import { IProductFirebaseModel } from './schema/product.schema';
 
 export interface IProductStateModel {
-    loading: boolean;
-    paginationState: IFirebasePaginationState<IProductFirebaseModel>;
-    currentId: string,
-    current: IProductFirebaseModel;
-    selected: IProductFirebaseModel;
+  loading: boolean;
+  paginationState: IFirebasePaginationState<IProductFirebaseModel>;
+  currentId: string,
+  current: IProductFirebaseModel;
+  selected: IProductFirebaseModel;
+  category: string;
 }

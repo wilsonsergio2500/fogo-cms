@@ -21,9 +21,14 @@
   }
 }
 
-page, blogs, blog {
+page, blogs, blog, store {
   h1, h2, h3, h4 {
     font-family: mycomic;
+  }
+
+  .font-branded {
+    font-family: mycomic;
+    font-size:20px;
   }
 }
 

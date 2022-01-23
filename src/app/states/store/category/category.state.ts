@@ -55,6 +55,11 @@ export class StoreCategoryState {
   }
 
   @Selector()
+  static getPageIndex(state: ICategoryStateModel): number {
+    return state.paginationState.paginator.pageIndex;
+  }
+
+  @Selector()
   static getCollectionTotalSize(state: ICategoryStateModel) : number {
     return state.paginationState.items.length;
   }

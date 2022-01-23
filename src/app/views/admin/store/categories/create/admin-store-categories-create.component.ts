@@ -28,7 +28,9 @@ export class AdminStoreCategoriesCreateComponent implements OnInit {
       image: new FieldTypes.FirebaseImageGalleryUploader('Image', true, 100),
       excerpt: new FieldTypes.MatEditor('Excerpt', true, 100, { placeholder: 'Insert excerpt or description...', hasSideBar: false }),
       rank: new FieldTypes.Slidder('Rank', 1, 10, 1, 100, { templateOptions: { thumbLabel: true } })
-    })
+    });
+
+    this.formlyGroup.patchValue({ rank: 1 });
 
   }
 

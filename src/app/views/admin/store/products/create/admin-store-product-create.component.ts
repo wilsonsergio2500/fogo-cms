@@ -70,6 +70,8 @@ export class AdminStoreProductCreateComponent implements OnInit {
       about: new FieldTypes.MatEditor('Aboout', false, 100, { placeholder: 'Insert more Information about this product...' })
     });
 
+    this.formlyGroup.patchValue({ rank: 1 });
+
   }
 
   formSubmit() {

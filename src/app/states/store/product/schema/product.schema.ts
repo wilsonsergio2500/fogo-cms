@@ -11,6 +11,6 @@ export interface IProductFirebaseModel extends IFireBaseEntity {
   originalPrice: number;
   category: string;
   quantity: number;
-  rank: string;
+  rank: number;
   about: string;
 }
