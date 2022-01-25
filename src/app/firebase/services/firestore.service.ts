@@ -1,6 +1,6 @@
 import { AngularFirestore, QueryFn } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { mergeMap, tap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
 export abstract class FirestoreService<T> {
@@ -35,23 +35,26 @@ export abstract class FirestoreService<T> {
 
   create(value: T) {
     const Id = this.firestore.createId();
-    return this.collection.doc(Id).set(Object.assign({}, { Id }, value)).then(_ => {
+    const payload = Object.assign({}, { Id }, value);
+    return this.collection.doc(Id).set(payload).then(_ => {
       if (!environment.production) {
         console.groupCollapsed(`Firestore Service [${this.basePath}] [create] [${Id}]`)
         console.log('[Id]', Id, value)
         console.groupEnd()
       }
-      return Object.assign({}, { Id }, value) as T;
+      return payload as T;
     })
   }
 
   merge(docPath: string, value: T) {
-    return this.collection.doc(docPath).set({ ...value }, { merge: true }).then(_ => {
+    const payload = { ...value }
+    return this.collection.doc(docPath).set(payload, { merge: true }).then(_ => {
       if (!environment.production) {
         console.groupCollapsed(`Firestore Service [${this.basePath}] [merge] [doc:${docPath}]`)
         console.log(`[${docPath}]`, value)
         console.groupEnd()
       }
+      return payload as T;
     })
   }
 

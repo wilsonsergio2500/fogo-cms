@@ -37,6 +37,10 @@ export class ProductGetByIdAction {
   constructor(public id: string) { }
 }
 
+export class ProductLoadAction {
+  static type = '[Product] Load';
+}
+
 export class ProductLoadFirstPageAction {
   static type = '[Product] Load First Page';
 }
@@ -49,13 +53,3 @@ export class ProductLoadPreviousPageAction {
   static type = '[Product] Load Previous Page';
 }
 
-/* Category Filter */
-
-export class ProductSetCategoryFilterAction {
-  static type = '[Product] Set Category Filter';
-  constructor(public category: string) {}
-}
-
-export class ProductByCategoryLoadFirstPageAction {
-
-}

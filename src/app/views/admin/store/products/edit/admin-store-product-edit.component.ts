@@ -22,7 +22,7 @@ export class AdminStoreProductEditComponent implements OnInit, OnDestroy {
   @Select(StoreProductState.IsLoading) working$: Observable<boolean>;
   @Select(StoreProductState.getCurrent) record$: Observable<IProductFirebaseModel>;
   formlyGroup: FormlyTypeGroup<IProductFirebaseModel>;
-  title = 'Categories';
+  title = 'Products';
   btnReadyLabel = 'Update';
   btnLoadingLabel = 'Updating...';
   listPath = "/admin/store/products";

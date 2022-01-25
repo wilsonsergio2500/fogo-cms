@@ -11,10 +11,10 @@ import { IFireBaseEntity } from '@firebase-module/types/firebase-entity';
 import { ProductFireStore } from './schema/product.firebase';
 import { IProductFirebaseModel } from './schema/product.schema';
 import { IProductStateModel } from './product.model';
-import { ProductSetAsLoadingAction, ProductSetAsDoneAction, ProductCreateAction, ProductUpdateAction, ProductRemoveAction, ProductGetByIdAction, ProductLoadFirstPageAction, ProductLoadNextPageAction, ProductLoadPreviousPageAction, ProductSetOrderByFieldAction, ProductSetCategoryFilterAction } from './product.actions';
-import { CategoryProductCreateAction, CategoryProductRemoveAction } from '@states/store/category-product/category-product.actions';
+import { ProductSetAsLoadingAction, ProductSetAsDoneAction, ProductCreateAction, ProductUpdateAction, ProductRemoveAction, ProductGetByIdAction, ProductLoadFirstPageAction, ProductLoadNextPageAction, ProductLoadPreviousPageAction, ProductSetOrderByFieldAction, ProductLoadAction } from './product.actions';
 import { tap, mergeMap, delay, filter, finalize, catchError } from 'rxjs/operators';
 import { Logger } from '@appUtils/logger';
+import { ListingMergeAction, ListingRemoveAction } from '@states/store/listing/listing.actions';
 
 
 @State<IProductStateModel>({
@@ -107,7 +107,7 @@ export class StoreProductState {
         const form = { ...action.request, ...metadata };
         return from(this.schemas.create(form));
       }),
-      mergeMap(form => ctx.dispatch(new CategoryProductCreateAction(form))),
+      mergeMap(form => ctx.dispatch(new ListingMergeAction(form))),
       tap((t) => {
         this.snackBarStatus.OpenComplete('Product Succesfully Created');
         ctx.dispatch(new Navigate(['/admin/store/products']));
@@ -136,7 +136,7 @@ export class StoreProductState {
         const now = Date.now();
         const metadata = <Partial<IFireBaseEntity>>{ updatedDate: now, updatedBy: user }
         const form = { ...action.request, ...metadata };
-        return from(this.schemas.update(action.request.Id, form)).pipe(mergeMap(() => ctx.dispatch(new CategoryProductCreateAction(form))));
+        return from(this.schemas.update(action.request.Id, form)).pipe(mergeMap(() => ctx.dispatch(new ListingMergeAction(form))));
       }),
       delay(1000),
       tap(() => {
@@ -150,8 +150,9 @@ export class StoreProductState {
   onRemove(ctx: StateContext<IProductStateModel>, action: ProductRemoveAction) {
     const { Id } = action.request;
     return this.confirmationDialog.OnConfirm('Are you sure you would like to delete this Product?').pipe(
-      mergeMap(() => from(this.schemas.delete(Id)).pipe(mergeMap(() => ctx.dispatch(new CategoryProductRemoveAction(action.request))))),
-      tap(() => this.snackBarStatus.OpenComplete('Product has been Removed')),
+      mergeMap(() => from(this.schemas.delete(Id)).pipe(mergeMap(() => ctx.dispatch(new ListingRemoveAction(action.request))))),
+      mergeMap(() => ctx.dispatch(new ProductLoadAction())),
+      finalize(() => this.snackBarStatus.OpenComplete('Product has been Removed')),
     )
   }
 
@@ -171,11 +172,10 @@ export class StoreProductState {
     )
   }
 
-  @Action(ProductLoadFirstPageAction)
-  onGoToFirstPage(ctx: StateContext<IProductStateModel>) {
+  @Action(ProductLoadAction)
+  onProductLoad(ctx: StateContext<IProductStateModel>) {
     const { paginationState } = ctx.getState();
-    const { pageSize, orderByField, begining } = paginationState;
-    ctx.dispatch(new ProductSetAsLoadingAction());
+    const { pageSize, orderByField } = paginationState;
     return this.schemas.queryCollection(ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
       .get().pipe(
         filter(models => !!models.docs?.length),
@@ -197,6 +197,14 @@ export class StoreProductState {
         }),
         finalize(() => ctx.dispatch(new ProductSetAsDoneAction()))
       )
+  }
+
+  @Action(ProductLoadFirstPageAction)
+  onGoToFirstPage(ctx: StateContext<IProductStateModel>) {
+    return ctx.dispatch(new ProductSetAsLoadingAction()).pipe(
+      delay(100),
+      mergeMap(() => ctx.dispatch(new ProductLoadAction()))
+    );
   }
 
   @Action(ProductLoadNextPageAction)
@@ -263,12 +271,5 @@ export class StoreProductState {
         })
       )
   }
-
-  @Action(ProductSetCategoryFilterAction)
-  onSetCategoryFilter(ctx: StateContext<IProductStateModel>, action: ProductSetCategoryFilterAction) {
-    const { category } = action;
-    ctx.patchState({ category })
-  }
-
 
 }

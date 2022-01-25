@@ -2,14 +2,14 @@
 
   <div fxLayout="column" fxLayoutAlign="start center" [ngStyle]="{'padding-top.px': 30}" *ngIf="working$ | async as loading; else done">
     <mat-progress-spinner mode="indeterminate" [diameter]="30" [strokeWidth]="2"></mat-progress-spinner>
-    <span [ngStyle]="{'padding.px': 10}">Loading Product...</span>
+    <span [ngStyle]="{'padding.px': 10}">Loading Products...</span>
   </div>
 
   <ng-template #done>
 
     <div class="navigate-heading">
       <div [ngStyle]="{'margin-top.px': 15}">
-        <button mat-mini-fab color="primary" aria-label="Category List" [routerLink]="listPath">
+        <button mat-mini-fab color="primary" aria-label="Products List" [routerLink]="listPath">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>

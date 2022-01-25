@@ -101,14 +101,14 @@ export const StoreProductCounter = functions.firestore.document('/store-products
   return;
 })
 
-export const StoreProductCategoryCounter = functions.firestore.document('/store-categories-products/{category}/products/{Id}').onWrite((change, context) => {
+export const StoreListingCategoryCounter = functions.firestore.document('/store-product-listings/categories/{category}/{Id}').onWrite((change, context) => {
 
   const { category } = context.params;
 
   let categories: { [key: string]: number | FirebaseFirestore.FieldValue } = {};
   categories[category] = 0;
 
-  const type = 'store-category-products';;
+  const type = 'store-product-listings:categories';;
   const doc = firebaseAdmin.firestore().collection('metrics').doc('totals');
 
   if (!change.before.exists) {
