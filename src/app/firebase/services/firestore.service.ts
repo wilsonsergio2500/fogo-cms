@@ -88,9 +88,12 @@ export abstract class FirestoreService<T> {
     })
   }
 
-
   queryCollection(queryFn?: QueryFn) {
     return this.firestore.collection<T>(`${this.basePath}`, queryFn);
+  }
+
+  queryPath(doc: string, collection: string, queryFn?: QueryFn) {
+    return this.collection.doc(doc).collection<T>(collection, queryFn);
   }
 
   private get collection() {

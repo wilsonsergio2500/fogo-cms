@@ -35,6 +35,11 @@ export class ListingRemoveAction{
   constructor(public request: IListingFirebaseModel) { }
 }
 
+export class ListingSetCategoryAction {
+  static type = '[Listing] Set Category';
+  constructor(public category: string) {}
+}
+
 export class ListingGetByIdAction{
   static type = '[Listing] Get By Id';
   constructor(public id: string) { }

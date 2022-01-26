@@ -6,7 +6,7 @@ import { FirebasePaginationStateModel } from '@firebase-module/types/firebase-pa
 import { ListingFireStore } from './schema/listing.firebase';
 import { IListingFirebaseModel } from './schema/listing.schema';
 import { IListingStateModel } from './listing.model';
-import { ListingSetAsLoadingAction, ListingSetAsDoneAction, ListingRemoveAction, ListingGetByIdAction, ListingLoadFirstPageAction, ListingLoadNextPageAction, ListingLoadPreviousPageAction,  ListingMergeAction, ListingMergeDealsAction, ListingMergeCategoryAction, ListingRemoveDealsAction } from './listing.actions';
+import { ListingSetAsLoadingAction, ListingSetAsDoneAction, ListingRemoveAction, ListingGetByIdAction, ListingLoadFirstPageAction, ListingLoadNextPageAction, ListingLoadPreviousPageAction,  ListingMergeAction, ListingMergeDealsAction, ListingMergeCategoryAction, ListingRemoveDealsAction, ListingSetCategoryAction } from './listing.actions';
 import { tap, mergeMap, delay, filter, finalize, catchError } from 'rxjs/operators';
 import { Logger } from '@appUtils/logger';
 
@@ -143,28 +143,19 @@ export class StoreProductListingState {
     );
   }
 
-  @Action(ListingGetByIdAction)
-  onGetById(ctx: StateContext<IListingStateModel>, action: ListingGetByIdAction){
-    const { id: currentId } = action;
-    ctx.dispatch(new ListingSetAsLoadingAction());
-    return from(this.schemas.queryCollection(ref => ref.where('Id', '==', currentId)).get()).pipe(
-      tap(records => {
-        if (records?.docs.length) {
-          const current = records.docs[0].data() as IListingFirebaseModel;
-          ctx.patchState({ currentId, current });
-        }
-      }),
-      delay(1000),
-      mergeMap(() => ctx.dispatch(new ListingSetAsDoneAction()))
-    )
+  @Action(ListingSetCategoryAction)
+  onSetCategory(ctx: StateContext<IListingStateModel>, action: ListingSetCategoryAction) {
+    const { category } = action;
+    ctx.patchState({ category });
+    return ctx.dispatch(new ListingLoadFirstPageAction());
   }
 
   @Action(ListingLoadFirstPageAction)
   onGoToFirstPage(ctx: StateContext<IListingStateModel>) {
-    const { paginationState  } = ctx.getState();
+    const { paginationState, category  } = ctx.getState();
     const { pageSize, orderByField, begining } = paginationState;
     ctx.dispatch(new ListingSetAsLoadingAction());
-    return this.schemas.queryCollection(ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
+    return this.schemas.queryPath("categories", category, ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
       .get().pipe(
         filter(models => !!models.docs?.length),
         tap(models => {
