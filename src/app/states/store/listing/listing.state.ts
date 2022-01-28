@@ -66,6 +66,11 @@ export class StoreProductListingState {
   }
 
   @Selector()
+  static getCurrentCategory(state: IListingStateModel): string {
+    return state.category;
+  }
+
+  @Selector()
   static getCurrent(state: IListingStateModel) : IListingFirebaseModel {
     return state.current;
   }

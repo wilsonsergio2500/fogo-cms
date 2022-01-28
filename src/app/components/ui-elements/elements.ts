@@ -1,6 +1,7 @@
 import { CheckAnimationComponent } from './check-animation/check-animation.component';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
 import { FirebasePaginationComponent } from './firebase-pagination/firebase-pagination.component';
+import { ProductPreviewComponent } from './product-preview/product-preview.component';
 import { getLoadingButtonComponents } from './loading-button/elements';
 import { getSnackBarStatusComponents, getSnackBarStatusProviders } from './snackbar-status/elements';
 import { getConfirmationDialogEntryComponents, getConfirmationDialogProviders } from './confirmation-dialog/elements';
@@ -16,7 +17,8 @@ export function getCustomUiElements() {
     ...getLoadingButtonComponents(),
     ...getSnackBarStatusComponents(),
     ...getConfirmationDialogEntryComponents(),
-    ...getSideNavigationComponents()
+    ...getSideNavigationComponents(),
+    ProductPreviewComponent
   ];
 }
 

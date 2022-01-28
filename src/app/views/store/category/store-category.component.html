@@ -1,3 +1,50 @@
+<div class="category-container">
 
+  <h2 class="page-title">Category: {{category$ | async}}</h2>
 
-Category View
+  <div fxLayout="column" fxLayoutAlign="start center" [ngStyle]="{'padding-top.px': 30}" *ngIf="working$ | async as loading; else done">
+    <mat-progress-spinner mode="indeterminate" [diameter]="30" [strokeWidth]="2"></mat-progress-spinner>
+    <span [ngStyle]="{'padding.px': 10}">Loading Store Categories...</span>
+  </div>
+
+  <ng-template #done>
+
+    <ng-container *ngIf="items$ | async as items">
+
+      <ng-container *ngIf="!items.length">
+        <mat-card>
+          No Categories to Display
+        </mat-card>
+      </ng-container>
+
+      <ng-container *ngIf="items.length">
+
+        <div class="grid-container">
+
+          <ng-container *ngFor="let item of items">
+
+            <product-preview [product]="item"></product-preview>
+
+            <!--<div class="product-category-item">
+              <div class="produc-category-card">
+                <div class="product-image-container">
+                  <img *ngIf="item.image" src="{{item.image}}" />
+                </div>
+                <div class="product-category-info">
+                  <a mat-button routerLink="/store/category/{{item.name}}" class="font-branded" color="primary" aria-label="category">{{item.name}}</a>
+                </div>
+              </div>
+
+            </div>-->
+
+          </ng-container>
+
+        </div>
+
+      </ng-container>
+
+    </ng-container>
+
+  </ng-template>
+
+</div>
