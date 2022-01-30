@@ -39,7 +39,7 @@ export class AdminStoreProductCreateComponent implements OnInit {
         return (deal) ? (originalPrice > price) : true;
       },
       message: (error, field) => {
-        return `${field.templateOptions.label} mus be greater than sales Price (For Deals)`;
+        return `${field.templateOptions.label} must be greater than sales Price (For Deals)`;
       }
     }
 

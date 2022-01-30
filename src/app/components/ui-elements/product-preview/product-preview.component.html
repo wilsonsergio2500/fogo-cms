@@ -5,7 +5,9 @@
   <div class="info-container">
     <div class="heading">
       <h3 class="category">{{product.category}}</h3>
-      <h2 class="app-title mat-color-accent name">{{product.name}}</h2>
+      <a routerLink="/store/product/{{product.Id}}">
+        <h2 class="app-title mat-color-accent name">{{product.name}}</h2>
+      </a>
     </div>
     <div class="description" [innerHtml]="product.description | safeHtml"></div>
     <div class="price-info">

@@ -1,0 +1,68 @@
+<div class="product-display">
+
+  <div class="left-panel">
+    <div class="card">
+      <div class="image-container">
+        <img *ngIf="product.image" src="{{product.image}}" />
+      </div>
+      <div class="image-footer">
+        <div class="footer-label">
+        <h4>Price</h4>
+        </div>
+        <div class="footer-price">
+          <span class="price">{{product.price | currency:'USD'  }}</span>
+          <span class="original-price" *ngIf="product.deal">{{product.originalPrice | currency:'USD'  }}</span>
+          <div class="actions">
+            <button mat-raised-button color="accent">
+              <mat-icon>shopping_cart</mat-icon>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="card">
+      <div>
+        <h2>Product Details</h2>
+      </div>
+      <div class="row">
+        <div class="label">
+          <h4>Name</h4>
+        </div>
+        <div class="value">{{product.name}}</div>
+      </div>
+      <div class="row">
+        <div class="label">
+          <h4>Description</h4>
+        </div>
+        <div class="value">
+          <div class="description" [innerHtml]="product.description | safeHtml"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="label">
+        <h4>Category</h4>
+        </div>
+        <div class="value">{{product.category}}</div>
+      </div>
+      <div class="row">
+        <div class="label">
+          <h4>Quanity</h4>
+        </div>
+        <div class="value">
+          {{product.quantity}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="label">
+        <h4>Created</h4>
+        </div>
+        <div class="value">{{product.createDate | date: 'dd/MM/yyyy'}}</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

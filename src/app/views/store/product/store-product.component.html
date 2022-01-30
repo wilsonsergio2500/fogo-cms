@@ -1,0 +1,24 @@
+<div class="content">
+
+  <div fxLayout="column" fxLayoutAlign="start center" [ngStyle]="{'padding-top.px': 30}" *ngIf="working$ | async as loading; else done">
+    <mat-progress-spinner mode="indeterminate" [diameter]="30" [strokeWidth]="2"></mat-progress-spinner>
+    <span [ngStyle]="{'padding.px': 10}">Loading Product...</span>
+  </div>
+
+  <ng-template #done>
+    <ng-container *ngIf="current$ | async as product">
+
+      <ng-container *ngIf="!product">
+        <mat-card>No Product Found</mat-card>
+      </ng-container>
+
+      <ng-container *ngIf="product">
+
+        <product-view [product]="product"></product-view>
+      </ng-container>
+
+    </ng-container>
+
+  </ng-template>
+
+</div>
