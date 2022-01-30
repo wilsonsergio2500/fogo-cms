@@ -150,17 +150,19 @@ export class StoreProductListingState {
 
   @Action(ListingSetCategoryAction)
   onSetCategory(ctx: StateContext<IListingStateModel>, action: ListingSetCategoryAction) {
+    const { paginationState } = ctx.getState();
     const { category } = action;
-    ctx.patchState({ category });
+    const newPaginationState = { ...paginationState, orderByField: 'rank' };
+    ctx.patchState({ category, paginationState: newPaginationState });
     return ctx.dispatch(new ListingLoadFirstPageAction());
   }
 
   @Action(ListingLoadFirstPageAction)
   onGoToFirstPage(ctx: StateContext<IListingStateModel>) {
     const { paginationState, category  } = ctx.getState();
-    const { pageSize, orderByField, begining } = paginationState;
+    const { pageSize, orderByField } = paginationState;
     ctx.dispatch(new ListingSetAsLoadingAction());
-    return this.schemas.queryPath("categories", category, ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
+        return this.schemas.queryPath("categories", category, ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
       .get().pipe(
         filter(models => !!models.docs?.length),
         tap(models => {

@@ -1,28 +1,30 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialComponentsModule } from '../materialcomponents.module';
 
 import { getCustomUiElements, getCustomUiElementsEntryComponents, getCustomUiElementsProviders } from './ui-elements/elements';
 import { getCustomFormElements, getCustomFormEntryComponents } from './form-elements/elements';
-import { RouterModule } from '@angular/router';
+import { getPipes } from './pipes/elements';
+
 
 @NgModule({
   declarations: [
     ...getCustomUiElements(),
-    ...getCustomFormElements()
+    ...getCustomFormElements(),
+    ...getPipes()
   ],
   imports: [
     CommonModule,
+    RouterModule,
     FlexLayoutModule,
-    MaterialComponentsModule,
-    RouterModule
-    
+    MaterialComponentsModule
   ],
   exports: [
     ...getCustomUiElements(),
-    ...getCustomFormElements()
+    ...getCustomFormElements(),
+    ...getPipes()
   ],
   providers: [
     ...getCustomUiElementsProviders()
@@ -32,6 +34,4 @@ import { RouterModule } from '@angular/router';
       ...getCustomFormEntryComponents()
   ]
 })
-export class CustomComponentsModule {
-
-}
+export class CustomComponentsModule {}

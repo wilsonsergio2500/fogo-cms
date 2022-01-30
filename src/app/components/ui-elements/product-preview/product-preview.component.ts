@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProductFirebaseModel } from '@states/store/product/schema/product.schema';
 
 @Component({
@@ -9,5 +9,10 @@ import { IProductFirebaseModel } from '@states/store/product/schema/product.sche
 export class ProductPreviewComponent {
 
   @Input() product: IProductFirebaseModel;
+  @Output() onAddToCard = new EventEmitter<IProductFirebaseModel>();
+
+  addToCard() {
+    this.onAddToCard.emit(this.product);
+  }
 
 }

@@ -35,8 +35,26 @@
       width: 1200px;
     }
 
-    .grid-container{
-        display:flex;
+    .grid-container {
+      display: flex;
+
+      @include xs {
+        flex-direction: column;
+      }
+
+      product-preview {
+        @include lg {
+          flex-basis: 25%;
+        }
+
+        @include md {
+          flex-basis: 33%;
+        }
+
+        @include sm {
+          flex-basis: 50%;
+        }
+      }
     }
   }
 }
