@@ -11,6 +11,7 @@
     <div class="price-info">
       <span class="price">
         {{product.price | currency:'USD'  }}
+        <span class="original" *ngIf="product.deal">{{product.originalPrice | currency:'USD'  }}</span>
       </span>
       <span class="action">
         <button mat-mini-fab color="accent" aria-label="add to cart" type="button" (click)="addToCard()">

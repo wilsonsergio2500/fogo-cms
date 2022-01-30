@@ -28,6 +28,13 @@
   align-items: center;
   padding: 10px;
 
+  .nav-heading {
+    display: flex;
+    h2 {
+      margin-left: 10px;
+    }
+  }
+
   .category-container {
     width: 100%;
 

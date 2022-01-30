@@ -56,6 +56,12 @@
           justify-content: center;
           font-size:14px;
           font-weight:bold;
+          flex-direction:column;
+          align-items:center;
+          .original{
+              text-decoration:line-through;
+              opacity:0.5;
+          }
         }
 
         .action {

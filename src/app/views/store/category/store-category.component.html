@@ -1,5 +1,14 @@
 <div class="category-container">
 
+  <div class="nav-heading">
+    <div [ngStyle]="{'margin-top.px': 15}">
+      <button mat-mini-fab color="accent" aria-label="View more categories" routerLink="/store/categories">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+    </div>
+    <h2>View More Categories</h2>
+  </div>
+
   <h2 class="page-title">Category: {{category$ | async}}</h2>
 
   <div fxLayout="column" fxLayoutAlign="start center" [ngStyle]="{'padding-top.px': 30}" *ngIf="working$ | async as loading; else done">
