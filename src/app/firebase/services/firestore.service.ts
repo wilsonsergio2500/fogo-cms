@@ -46,7 +46,8 @@ export abstract class FirestoreService<T> {
     })
   }
 
-  merge(docPath: string, value: T) {
+  merge(path: string[], value: T) {
+    const docPath = path.length > 1 ? path.join('/') : path[0];
     const payload = { ...value }
     return this.collection.doc(docPath).set(payload, { merge: true }).then(_ => {
       if (!environment.production) {

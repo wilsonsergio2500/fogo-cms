@@ -7,7 +7,7 @@ import { ListingFireStore } from './schema/listing.firebase';
 import { IListingFirebaseModel } from './schema/listing.schema';
 import { IListingStateModel } from './listing.model';
 import { ListingSetAsLoadingAction, ListingSetAsDoneAction, ListingRemoveAction, ListingGetByIdAction, ListingLoadFirstPageAction, ListingLoadNextPageAction, ListingLoadPreviousPageAction,  ListingMergeAction, ListingMergeDealsAction, ListingMergeCategoryAction, ListingRemoveDealsAction, ListingSetCategoryAction } from './listing.actions';
-import { tap, mergeMap, delay, filter, finalize, catchError } from 'rxjs/operators';
+import { tap, filter, finalize, catchError } from 'rxjs/operators';
 import { Logger } from '@appUtils/logger';
 
 
@@ -15,7 +15,7 @@ import { Logger } from '@appUtils/logger';
     name: 'listingState',
     defaults: <IListingStateModel>{
         loading: false,
-        paginationState: new FirebasePaginationStateModel<IListingFirebaseModel>(),
+        paginationState: new FirebasePaginationStateModel<IListingFirebaseModel>(10, 'rank'),
         currentId: null,
         current: null,
         selected: null
@@ -107,7 +107,7 @@ export class StoreProductListingState {
   onMergeCategory(ctx: StateContext<IListingStateModel>, action: ListingMergeCategoryAction) {
     const { category, Id, publish } = action.request;
     if (publish) {
-      return from(this.schemas.merge(`categories/${category}/${Id}`, action.request));
+      return from(this.schemas.merge(['categories', category, Id], action.request));
     } else {
       return ctx.dispatch(new ListingRemoveAction(action.request));
     }
@@ -116,10 +116,11 @@ export class StoreProductListingState {
   @Action(ListingMergeDealsAction)
   onMergeDeals(ctx: StateContext<IListingStateModel>, action: ListingMergeDealsAction) {
     const { category, Id, deal } = action.request;
+    const collectionGroup = 'deals';
     if (deal) {
       return merge(
-        from(this.schemas.merge(`deals/all/${Id}`, action.request)),
-        from(this.schemas.merge(`deals/${category}/${Id}`, action.request))
+        from(this.schemas.merge([collectionGroup, 'all', Id], action.request)),
+        from(this.schemas.merge([collectionGroup, category, Id], action.request))
       );
     }
     else {
@@ -150,10 +151,8 @@ export class StoreProductListingState {
 
   @Action(ListingSetCategoryAction)
   onSetCategory(ctx: StateContext<IListingStateModel>, action: ListingSetCategoryAction) {
-    const { paginationState } = ctx.getState();
     const { category } = action;
-    const newPaginationState = { ...paginationState, orderByField: 'rank' };
-    ctx.patchState({ category, paginationState: newPaginationState });
+    ctx.patchState({ category });
     return ctx.dispatch(new ListingLoadFirstPageAction());
   }
 
@@ -187,9 +186,9 @@ export class StoreProductListingState {
 
   @Action(ListingLoadNextPageAction)
   onNextPage(ctx: StateContext<IListingStateModel>) {
-    const { paginationState } = ctx.getState();
+    const { paginationState, category } = ctx.getState();
     let { pageSize, last, pagination_count, prev_start_at, first, orderByField } = paginationState;
-    return this.schemas.queryCollection(ref => ref.limit(pageSize).orderBy(orderByField, 'desc').startAfter(last))
+    return this.schemas.queryPath("categories", category, ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
       .get().pipe(
         tap(models => {
           const currentSize = models.docs.length;
@@ -222,9 +221,9 @@ export class StoreProductListingState {
 
   @Action(ListingLoadPreviousPageAction)
   onPreviousPage(ctx: StateContext<IListingStateModel>) {
-    const { paginationState } = ctx.getState();
+    const { paginationState, category } = ctx.getState();
     let { pageSize, orderByField, first, pagination_count, prev_start_at } = paginationState;
-    return this.schemas.queryCollection(ref => ref.orderBy(orderByField, 'desc').endBefore(first).limit(pageSize))
+    return this.schemas.queryPath("categories", category, ref => ref.limit(pageSize).orderBy(orderByField, 'desc'))
       .get().pipe(
         tap(models => {
           const next = true;
