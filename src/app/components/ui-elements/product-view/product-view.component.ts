@@ -1,14 +1,20 @@
-import { Component, Input} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProductFirebaseModel } from '@states/store/product/schema/product.schema';
 
 @Component({
-    selector: 'product-view',
-    templateUrl: 'product-view.component.html',
-    styleUrls: [`product-view.component.scss`]
-  })
-  export class ProductViewComponent {
-   
+  selector: 'product-view',
+  templateUrl: 'product-view.component.html',
+  styleUrls: [`product-view.component.scss`]
+})
+export class ProductViewComponent {
+
   @Input() product: IProductFirebaseModel;
-   
-  
-  } 
+  @Output() onAddToCart = new EventEmitter<IProductFirebaseModel>();
+
+  addToCart() {
+    this.onAddToCart.emit(this.product);
+  }
+
+}
+
+
