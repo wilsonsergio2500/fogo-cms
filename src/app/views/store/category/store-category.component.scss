@@ -30,6 +30,7 @@
 
   .nav-heading {
     display: flex;
+
     h2 {
       margin-left: 10px;
     }
@@ -44,6 +45,7 @@
 
     .grid-container {
       display: flex;
+      flex-wrap: wrap;
 
       @include xs {
         flex-direction: column;

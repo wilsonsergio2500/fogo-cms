@@ -42,32 +42,39 @@
 
       .image-footer {
         display: flex;
+        flex-direction: column;
         margin: 20px;
 
-        .footer-label {
+        .price-info {
           display: flex;
-          justify-content: center;
-          width: 50%;
+
+          .footer-label {
+            display: flex;
+            justify-content: center;
+            width: 50%;
+          }
+
+          .footer-price {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+
+            .price {
+              font-size: 20px;
+              font-weight: bold;
+            }
+
+            .original-price {
+              text-decoration: line-through;
+              opacity: 0.5;
+            }
+          }
         }
 
-        .footer-price {
-          width: 50%;
+        .actions {
           display: flex;
-          flex-direction: column;
-
-          .price {
-            font-size: 20px;
-            font-weight: bold;
-          }
-
-          .original-price {
-            text-decoration: line-through;
-            opacity: 0.5;
-          }
-
-          .actions{
-              display:flex;
-          }
+          align-items: center;
+          justify-content: center;
         }
       }
     }
@@ -111,5 +118,9 @@
         }
       }
     }
+  }
+
+  .bottom-panel{
+      margin:20px;
   }
 }

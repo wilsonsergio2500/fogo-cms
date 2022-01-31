@@ -9,10 +9,10 @@ import { IProductFirebaseModel } from '@states/store/product/schema/product.sche
 export class ProductPreviewComponent {
 
   @Input() product: IProductFirebaseModel;
-  @Output() onAddToCard = new EventEmitter<IProductFirebaseModel>();
+  @Output() onAddToCart = new EventEmitter<IProductFirebaseModel>();
 
-  addToCard() {
-    this.onAddToCard.emit(this.product);
+  addToCart() {
+    this.onAddToCart.emit(this.product);
   }
 
 }
