@@ -32,11 +32,6 @@ service cloud.firestore {
       allow write: if request.auth.token.superuser || request.auth.token.admin || request.auth.token.sales;
     }
 
-    match /store-product-listings/{Id=**} {
-      allow read;
-      allow write: if request.auth.token.superuser || request.auth.token.admin || request.auth.token.sales;
-    }
-
      match /users/{Id} {
       allow read: if true;
       allow write: if request.auth.uid != null;
@@ -47,6 +42,17 @@ service cloud.firestore {
       allow create: if request.auth.uid == Id;
       allow update: if request.auth.token.superuser;
     }
+
+    match /store-product-listings/{Id=**} {
+      allow read;
+      allow write: if request.auth.token.superuser || request.auth.token.admin || request.auth.token.sales;
+    }
+
+     match /metrics/{Id=**} {
+      allow read;
+      allow write: if false;
+    }
+    
 
   }
 
