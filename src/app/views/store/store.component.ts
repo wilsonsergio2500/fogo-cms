@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AuthState } from '@states/auth/auth.state';
 import { AppFirebaseUser } from '@states/auth/auth.model';
 import { INavigationModel } from '@firebase-schemas/navigations/navigation.model';
+import { StoreCartManagerState } from '@states/store/cart/cart-manager.state';
 
 @Component({
   selector: 'store',
@@ -14,8 +15,9 @@ import { INavigationModel } from '@firebase-schemas/navigations/navigation.model
 })
 export class StoreComponent implements OnInit, OnDestroy {
 
-  @Select(NavigationState.getNavigationRoot) navigations$: Observable<INavigationModel[]>;
   @Select(AuthState.getUser) user$: Observable<AppFirebaseUser>;
+  @Select(NavigationState.getNavigationRoot) navigations$: Observable<INavigationModel[]>;
+  @Select(StoreCartManagerState.getCurrentCartSize) cartSize$: Observable<number>;
   mobileQuery: MediaQueryList;
 
   constructor(

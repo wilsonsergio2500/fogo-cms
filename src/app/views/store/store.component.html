@@ -23,6 +23,8 @@
           <a mat-button routerLink="/blogs"><mat-icon>notes</mat-icon></a>
         </div>-->
 
+        <cart-counter [cartSize]="cartSize$ | async"></cart-counter>
+
         <ng-container *ngIf="user$ | async as user; else done">
 
           <ng-container *ngIf="user.photoURL">

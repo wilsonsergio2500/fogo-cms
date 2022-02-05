@@ -14,7 +14,7 @@
 
       <ng-container *ngIf="product">
 
-        <product-view [product]="product"></product-view>
+        <product-view [product]="product" (onAddToCart)="addTocart($event)"></product-view>
       </ng-container>
 
     </ng-container>

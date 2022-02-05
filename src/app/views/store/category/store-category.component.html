@@ -32,7 +32,7 @@
 
           <ng-container *ngFor="let item of items">
 
-            <product-preview [product]="item"></product-preview>
+            <product-preview [product]="item" (onAddToCart)="addToCart($event)"></product-preview>
 
           </ng-container>
 

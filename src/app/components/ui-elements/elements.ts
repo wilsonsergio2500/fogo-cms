@@ -8,6 +8,7 @@ import { getSnackBarStatusComponents, getSnackBarStatusProviders } from './snack
 import { getConfirmationDialogEntryComponents, getConfirmationDialogProviders } from './confirmation-dialog/elements';
 import { getToolbarNavigationComponents } from './toolbar-navigation/elements';
 import { getSideNavigationComponents } from './side-navigation/elements';
+import { CartCounterComponent } from './cart-counter/cart-counter.component';
 
 export function getCustomUiElements() {
   return [
@@ -20,7 +21,8 @@ export function getCustomUiElements() {
     ...getConfirmationDialogEntryComponents(),
     ...getSideNavigationComponents(),
     ProductPreviewComponent,
-    ProductViewComponent
+    ProductViewComponent,
+    CartCounterComponent
   ];
 }
 

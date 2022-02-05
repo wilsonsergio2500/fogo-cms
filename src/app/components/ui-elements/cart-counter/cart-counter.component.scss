@@ -1,0 +1,11 @@
+:host {
+  position: relative;
+
+  ::ng-deep {
+    .mat-badge-content {
+      left: 35px;
+      font-size: 10px;
+    }
+  }
+
+}
