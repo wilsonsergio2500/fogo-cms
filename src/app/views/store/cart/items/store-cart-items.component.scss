@@ -1,0 +1,105 @@
+@mixin xs {
+  @media screen and (max-width: 599px) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (min-width: 960px) and (max-width: 1279px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+
+    .no-items-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      .empty-card-msg{
+          display:flex;
+          align-items:center;
+          flex-direction:column;
+      }
+      .msg-icon {
+        font-size: 3em;
+      }
+
+      h1 {
+        text-align: center;
+        padding: 20px;
+      }
+    }
+
+    @include lg {
+      width: 1300px;
+    }
+
+    @include xs {
+      flex-direction: column-reverse;
+    }
+
+    .product-panel {
+      width: 80%;
+
+      @include xs {
+        width: 100%;
+      }
+
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+
+        product-preview {
+          @include lg {
+            width: 25%;
+          }
+
+          @include md {
+            width: 33%;
+          }
+
+          @include sm {
+            width: 50%;
+          }
+
+          @include xs {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .table-panel {
+      width: 20%;
+    }
+  }
+}

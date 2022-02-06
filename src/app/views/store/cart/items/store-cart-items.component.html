@@ -1,0 +1,46 @@
+
+<div class="content">
+
+  <ng-container *ngIf="products$ | async as items">
+
+    <ng-container *ngIf="!items.length">
+      <div class="no-items-panel">
+        <mat-card class="empty-card-msg">
+          <div class="flex-center">
+            <mat-icon class="msg-icon">remove_shopping_cart</mat-icon>
+          </div>
+          <h1>Oops!.. No Items in Your cart at this moment</h1>
+          <button mat-raised-button color="primary" routerLink="/store/categories">
+            <mat-icon>shopping_cart_checkout</mat-icon>
+          Start Shopping
+          </button>
+        </mat-card>
+      </div>
+      
+    </ng-container>
+
+    <ng-container *ngIf="items.length">
+
+      <div class="product-panel">
+
+        <div class="grid">
+          <ng-container *ngFor="let item of items">
+            <product-preview [product]="item" mode="Remove" (onRemoveFromCart)="removeFromCart($event)"></product-preview>
+          </ng-container>
+
+        </div>
+      </div>
+
+      <div class="table-panel">
+        table panel
+      </div>
+
+
+
+    </ng-container>
+
+  </ng-container>
+
+ 
+
+</div>

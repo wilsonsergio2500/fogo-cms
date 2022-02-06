@@ -9,7 +9,7 @@ export class CartCounterComponent {
 
   @Input() cartSize: number = 0;
 
-  get hasCartSize() {
+  get hasNoCartSize() {
     return !!!this.cartSize;
   }
 }

@@ -14,7 +14,8 @@ const routes: Routes = [
       <Route>{ path: '', component: StoreDashboardComponent },
       <Route>{ path: 'categories', component: StoreCategoriesComponent, resolve: { action: StoreCategoriesResolver } },
       <Route>{ path: 'category/:category', component: StoreCategoryComponent, resolve: { action: StoreCategoryResolver } },
-      <Route>{ path: 'product/:id', component: StoreProductComponent, resolve: { action: StoreProductResolver}}
+      <Route>{ path: 'cart', loadChildren: () => import('./cart/store-cart.module').then(m => m.StoreCartModule)},
+      <Route>{ path: 'product/:id', component: StoreProductComponent, resolve: { action: StoreProductResolver } }
     ] }
 ];
 

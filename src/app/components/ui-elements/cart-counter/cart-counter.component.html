@@ -1,4 +1,4 @@
-<a mat-button [matBadge]="cartSize" matBadgePosition="above" matBadgeColor="accent" [matBadgeHidden]="hasCartSize">
+<a mat-button [matBadge]="cartSize" matBadgePosition="above" matBadgeColor="accent" [matBadgeHidden]="hasNoCartSize" [routerLink]="hasNoCartSize ? [] : ['/store/cart']">
   <mat-icon>shopping_cart</mat-icon>
 </a>
 

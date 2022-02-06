@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreRoutingModule } from './store.routing.module';
+import { StoreCartRoutingModule } from './store-cart.routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomComponentsModule } from '@customComponents/components.module';
-import { SharedModule } from '../../shared.module';
 import { FirebaseModule } from '@firebase-module/firebase.module';
-import { MaterialComponentsModule } from '../../materialcomponents.module';
-import { getComponents, getProviders } from './elements';
-
+import { SharedModule } from '../../../shared.module';
+import { MaterialComponentsModule } from '../../../materialcomponents.module';
+import { getComponents, getProviders } from './element';
 
 @NgModule({
-  declarations: [
-    ...getComponents()
+  declarations:[
+      ...getComponents()
   ],
   providers: [
     ...getProviders()
@@ -23,8 +22,7 @@ import { getComponents, getProviders } from './elements';
     SharedModule,
     FirebaseModule,
     MaterialComponentsModule,
-    StoreRoutingModule,
-
+    StoreCartRoutingModule,
   ]
 })
-export class StoreModule { }
+export class StoreCartModule { }

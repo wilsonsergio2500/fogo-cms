@@ -11,7 +11,8 @@ import { IFireBaseEntity } from '@firebase-module/types/firebase-entity';
 import { CartManagerFireStore } from './schema/cart-manager.firebase';
 import { ICartManagerFirebaseModel } from './schema/cart-manager.schema';
 import { ICartManagerStateModel, ICartStorageModel } from './cart-manager.model';
-import { CartManagerSetAsLoadingAction, CartManagerSetAsDoneAction, CartManagerCreateAction, CartManagerUpdateAction, CartManagerLoadItemsAction, CartManagerSetPaginatorAction, CartManagerPaginateItemsAction, CartManagerRemoveAction, CartManagerGetByIdAction, CartManagerAddProductAction, CartManagerLoadProductsFromStorageAction } from './cart-manager.actions';
+import { IProductFirebaseModel } from '../product/schema/product.schema';
+import { CartManagerSetAsLoadingAction, CartManagerSetAsDoneAction, CartManagerCreateAction, CartManagerUpdateAction, CartManagerLoadItemsAction, CartManagerSetPaginatorAction, CartManagerPaginateItemsAction, CartManagerRemoveAction, CartManagerGetByIdAction, CartManagerAddProductAction, CartManagerLoadProductsFromStorageAction, CartManagerRemoveProductAction } from './cart-manager.actions';
 import { tap, mergeMap, delay } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import '@appUtils/local-storage-helper';
@@ -84,6 +85,11 @@ export class StoreCartManagerState {
     return state.products.length;
   }
 
+  @Selector()
+  static getCartProducts(state: ICartManagerStateModel): IProductFirebaseModel[] {
+    return state.products;
+  }
+
   ngxsOnInit(ctx: StateContext<ICartManagerStateModel>) {
     ctx.dispatch(new CartManagerLoadProductsFromStorageAction());
   }
@@ -112,11 +118,28 @@ export class StoreCartManagerState {
 
   @Action(CartManagerAddProductAction)
   onAddProductToCart(ctx: StateContext<ICartManagerStateModel>, action: CartManagerAddProductAction) {
+    const Indexer = (product: IProductFirebaseModel) => `${product.Id}|${Date.now()}`;
     const { products } = ctx.getState();
-    const cart = <ICartStorageModel>{ updated: Date.now(), products: [...products, action.product] };
+    const cartIndex = Indexer(action.product);
+    const cart = <ICartStorageModel>{ updated: Date.now(), products: [...products, { ...action.product, cartIndex }] };
     this.document.defaultView.IntoLocalStorage(CART_STORAGE, cart);
     ctx.patchState({ products: cart.products });
     this.snackBarStatus.OpenComplete('Product added to Cart');
+  }
+
+  @Action(CartManagerRemoveProductAction)
+  onRemoveProductFromCart(ctx: StateContext<ICartManagerStateModel>, action: CartManagerRemoveProductAction) {
+    const { product } = action;
+    const { products : items } = ctx.getState();
+    return this.confirmationDialog.OnConfirm('Are you sure you would like to remove this Item from your Cart?').pipe(
+      tap(() => {
+        const products = items.filter(g => g.cartIndex != product.cartIndex);
+        const cart = <ICartStorageModel>{ updated: Date.now(), products: [...products] };
+        this.document.defaultView.IntoLocalStorage(CART_STORAGE, cart);
+        ctx.patchState({ products: cart.products });
+        this.snackBarStatus.OpenComplete('Product Removed From Cart');
+      })
+    )
   }
 
   @Action(CartManagerCreateAction)

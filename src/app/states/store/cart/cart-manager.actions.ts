@@ -50,6 +50,11 @@ export class CartManagerAddProductAction {
   constructor(public product: IProductFirebaseModel) { }
 }
 
+export class CartManagerRemoveProductAction {
+  static type = '[Cart Manager] Remove Product From Cart';
+  constructor(public product: IProductFirebaseModel) { }
+}
+
 export class CartManagerLoadProductsFromStorageAction {
   static type = '[Cart Manager] Load From LocalStore';
 }

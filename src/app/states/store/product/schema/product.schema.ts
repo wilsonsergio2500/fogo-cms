@@ -13,4 +13,5 @@ export interface IProductFirebaseModel extends IFireBaseEntity {
   quantity: number;
   rank: number;
   about: string;
+  cartIndex?: number;
 }
