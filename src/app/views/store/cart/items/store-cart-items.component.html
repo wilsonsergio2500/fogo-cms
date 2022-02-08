@@ -32,7 +32,7 @@
       </div>
 
       <div class="table-panel">
-        table panel
+        <cart-product-list [products]="items" [cartSize]="cartSize$ | async" [cartTotal]="cartTotal$ | async" ></cart-product-list>
       </div>
 
 

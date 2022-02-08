@@ -1,0 +1,31 @@
+<div class="heading">
+  <div class="title">
+    <h2>My Cart</h2>
+  </div>
+  <div class="total">
+    <span [matBadge]="cartSize" ></span>
+  </div>
+</div>
+<div class="product-list">
+  <div class="product-list-item" *ngFor="let product of products">
+    <div class="product-name">{{product.name}}</div>
+    <div class="product-price">{{product.price  | currency:'USD'}}</div>
+  </div>
+</div>
+<div class="cart-calcs">
+  <div class="label">Total</div>
+  <div class="value">{{cartTotal  | currency:'USD'}}</div>
+</div>
+<div class="action-items">
+  <button mat-raised-button>
+    Empty Cart
+    <mat-icon color="warn">delete</mat-icon>
+  </button>
+  <button mat-raised-button>
+    Continue Shopping
+  </button>
+  <button mat-raised-button color="primary">
+    Continue Checkout
+    <mat-icon>shopping_cart_checkout</mat-icon>
+  </button>
+</div>

@@ -13,6 +13,8 @@ import { CartManagerRemoveProductAction } from '@states/store/cart/cart-manager.
 export class StoreCartItemsComponent {
 
   @Select(StoreCartManagerState.getCartProducts) products$: Observable<IProductFirebaseModel[]>;
+  @Select(StoreCartManagerState.getCurrentCartSize) cartSize$: Observable<number>;
+  @Select(StoreCartManagerState.getCartTotal) cartTotal$: Observable<number>;
 
   constructor(private store: Store) { }
 

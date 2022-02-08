@@ -9,6 +9,7 @@ import { getConfirmationDialogEntryComponents, getConfirmationDialogProviders } 
 import { getToolbarNavigationComponents } from './toolbar-navigation/elements';
 import { getSideNavigationComponents } from './side-navigation/elements';
 import { CartCounterComponent } from './cart-counter/cart-counter.component';
+import { CartProductListComponent } from './cart-product-list/cart-product-list.component';
 
 export function getCustomUiElements() {
   return [
@@ -22,7 +23,8 @@ export function getCustomUiElements() {
     ...getSideNavigationComponents(),
     ProductPreviewComponent,
     ProductViewComponent,
-    CartCounterComponent
+    CartCounterComponent,
+    CartProductListComponent
   ];
 }
 

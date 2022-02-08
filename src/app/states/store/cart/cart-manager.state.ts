@@ -90,6 +90,12 @@ export class StoreCartManagerState {
     return state.products;
   }
 
+  @Selector()
+  static getCartTotal(state: ICartManagerStateModel): number {
+    const total = state.products.reduce((c, p) => c + p.price, 0);
+    return total;
+  }
+
   ngxsOnInit(ctx: StateContext<ICartManagerStateModel>) {
     ctx.dispatch(new CartManagerLoadProductsFromStorageAction());
   }
