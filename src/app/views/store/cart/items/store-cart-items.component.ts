@@ -3,7 +3,8 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StoreCartManagerState } from '@states/store/cart/cart-manager.state';
 import { IProductFirebaseModel } from '@states/store/product/schema/product.schema';
-import { CartManagerRemoveProductAction } from '@states/store/cart/cart-manager.actions';
+import { CartManagerEmptyCartAction, CartManagerRemoveProductAction } from '@states/store/cart/cart-manager.actions';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'store-cart-items',
@@ -20,5 +21,12 @@ export class StoreCartItemsComponent {
 
   removeFromCart(product: IProductFirebaseModel) {
     this.store.dispatch(new CartManagerRemoveProductAction(product));
+  }
+
+  onEmptyCart() {
+    this.store.dispatch(new CartManagerEmptyCartAction())
+  }
+  onCheckout() {
+    this.store.dispatch(new Navigate(['store', 'cart', 'checkout']));
   }
 }

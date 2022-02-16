@@ -38,6 +38,18 @@
     width: 100%;
     display: flex;
 
+    @include lg {
+      width: 1300px;
+    }
+
+    @include sm {
+      flex-direction: column-reverse;
+    }
+
+    @include xs {
+      flex-direction: column-reverse;
+    }
+
     .no-items-panel {
       display: flex;
       align-items: center;
@@ -58,18 +70,6 @@
         text-align: center;
         padding: 20px;
       }
-    }
-
-    @include lg {
-      width: 1300px;
-    }
-
-    @include sm {
-      flex-direction: column-reverse;
-    }
-
-    @include xs {
-      flex-direction: column-reverse;
     }
 
     .product-panel {

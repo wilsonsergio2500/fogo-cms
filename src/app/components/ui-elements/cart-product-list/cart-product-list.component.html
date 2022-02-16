@@ -17,14 +17,14 @@
   <div class="value">{{cartTotal  | currency:'USD'}}</div>
 </div>
 <div class="action-items">
-  <button mat-raised-button>
+  <button mat-raised-button (click)="emptyCart()">
     Empty Cart
     <mat-icon color="warn">delete</mat-icon>
   </button>
   <button mat-raised-button>
     Continue Shopping
   </button>
-  <button mat-raised-button color="primary">
+  <button mat-raised-button color="primary" (click)="checkout()">
     Continue Checkout
     <mat-icon>shopping_cart_checkout</mat-icon>
   </button>

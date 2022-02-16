@@ -1,0 +1,17 @@
+<div class="content">
+
+  <div class="action-items">
+    <a mat-raised-button aria-label="View order details" color="primary" routerLink="/store/cart">
+      View Order Details
+      <ng-container *ngIf="cartTotal$ | async as cartTotal">
+        <span>{{cartTotal | currency:'USD'}}</span>
+      </ng-container>
+    </a>
+  </div>
+
+  <div>
+
+  </div>
+
+</div>
+
