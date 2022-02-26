@@ -1,7 +1,6 @@
-
 @font-face {
   font-family: 'mycomic';
-  src: url('../fonts/mycomic.ttf') format('truetype');
+  src: url('../assets/fonts/mycomic.ttf') format('opentype');
 }
 
 .homepage {
@@ -17,7 +16,7 @@
   display: flex;
 
   .mat-icon {
-      margin:5px;
+    margin: 5px;
   }
 }
 
@@ -28,16 +27,17 @@ page, blogs, blog, store {
 
   .font-branded {
     font-family: mycomic;
-    font-size:20px;
+    font-size: 20px;
   }
 }
 
 toolbar-navigation-item {
   .mat-button-wrapper {
     font-family: mycomic;
-    font-size:20px;
+    font-size: 20px;
   }
 }
+
 .mat-menu-panel {
   a {
     font-family: mycomic;
@@ -50,13 +50,15 @@ toolbar-navigation-item {
   }
 }
 
-.logo-font{
-    font-family:mycomic;
+.logo-font {
+  font-family: mycomic;
 }
+
 .content-container hr {
   color: var(--mat-color-primary) !important;
 }
-.mat-list-item-content{
-    font-size:18px !important;
-    font-family:mycomic;
+
+.mat-list-item-content {
+  font-size: 18px !important;
+  font-family: mycomic;
 }
