@@ -129,7 +129,7 @@ export namespace FieldTypes {
   }
 
   export class HiddenField extends InputBase {
-    constructor(label?: string, required: boolean = true) {
+    constructor(label?: string, required: boolean = true, config?: Partial<InputBase>) {
       super(label, required, 100);
       this.templateOptions.type = 'text';
       this.className = 'hidden-field';
@@ -157,7 +157,6 @@ export namespace FieldTypes {
               let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
               return regex.test(value);
             } else {
-              //if value should be handle by the required validator
               return true;
             }
 

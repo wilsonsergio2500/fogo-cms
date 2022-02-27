@@ -9,9 +9,24 @@
     </a>
   </div>
 
-  <div>
 
-  </div>
+    <mat-card class="steps-card">
+      <mat-vertical-stepper linear  #stepper>
+        <mat-step label="General" >
+            <checkout-personal-form (next)="onGeneral($event, stepper)" ></checkout-personal-form>
+        </mat-step>
+        <mat-step label="Address" disable>
+          <checkout-address-form (next)="onAddress($event, stepper)"></checkout-address-form>
+
+        </mat-step>
+        <mat-step label="Payment">
+          <p>You're welcome.</p>
+        </mat-step>
+      </mat-vertical-stepper>
+    </mat-card>
+
+   
+
 
 </div>
 

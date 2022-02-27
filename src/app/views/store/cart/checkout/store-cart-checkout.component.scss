@@ -8,26 +8,30 @@
   align-items: center;
   padding: 10px;
 
+  ::ng-deep {
+    .mat-step-header {
+      pointer-events: none !important;
+    }
+  }
+
+
   .content {
     width: 100%;
     display: flex;
+    flex-direction: column;
 
+    .steps-card{
+        margin:20px;
+    }
     @include lg {
       width: 1300px;
     }
 
-    @include sm {
-      flex-direction: column-reverse;
-    }
 
-    @include xs {
-      flex-direction: column-reverse;
-    }
-
-    .action-items{
-        display:flex;
-        flex-grow:1;
-        justify-content:flex-end;
+    .action-items {
+      display: flex;
+      flex-grow: 1;
+      justify-content: flex-end;
     }
   }
 }

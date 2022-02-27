@@ -29,6 +29,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSliderModule } from '@angular/material/slider'
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 const components = [
@@ -61,7 +62,8 @@ const components = [
   MatExpansionModule,
   MatTreeModule,
   MatFormFieldModule,
-  MatSliderModule
+  MatSliderModule,
+  MatStepperModule
 ];
 
 @NgModule({
